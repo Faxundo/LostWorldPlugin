@@ -1,0 +1,25 @@
+# Plugin made by Faxu
+
+stats:
+  # Remember 2 points of life = 1 Heart
+  # Vanilla Default = 20
+  default-constitution: 20
+  dextery-affects-snowball: false
+  dextery-affects-egg: true
+
+descriptions:
+  constitution: "&eIncreases your health."
+  defense: "&eReduces the incoming damage."
+  strength: "&eIncreases the melee damage."
+  dextery: "&eIncreases the range damage."
+  intelligence: "&eDefine your willpower"
+  wisdom: "&eIncreases the experience obtained."
+  luck: "&eUseful for fishing, some loot tables of chests and for obtain more loot at mine blocks."
+  charisma: ""
+
+messages:
+  sql-error: "&cSQL error, please report to administrator."
+  no-perms: "&cYou don't have permissions for this."
+  no-arguments: "&cThis command need arguments. Please read the documentation."
+  invalid-player: "&cInvalid player."
+  help: "—[ Lost World ]\n/lostworld stats\n/lostworld set\n/lostworld help"
