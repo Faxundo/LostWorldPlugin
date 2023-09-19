@@ -56,4 +56,15 @@ public class PlayerDataManager {
             ex.printStackTrace();
         }
     }
+
+    public void updateStat (Player player, String stat, Integer amount) {
+        PlayerData playerData = getPlayerData(player);
+        int value = playerData.getStat(stat);
+        playerData.setStat(stat, value + amount);
+        try {
+            playerDataDao.update(playerData);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

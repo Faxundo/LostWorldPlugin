@@ -1,7 +1,7 @@
 package faxu.lost_world.lostworld.willpower;
 
 import faxu.lost_world.lostworld.LostWorld;
-import faxu.lost_world.lostworld.stats.Intelligence;
+import faxu.lost_world.lostworld.data.PlayerData;
 import faxu.lost_world.lostworld.util.ActionBar;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
@@ -10,29 +10,45 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
 public class Willpower {
+    private final LostWorld plugin;
     private final NamespacedKey willpower;
-    private final Intelligence intelligence;
+    private final NamespacedKey willpowerMax;
 
     public Willpower(LostWorld plugin) {
-        this.willpower = new NamespacedKey(plugin, "willpower");
-        this.intelligence = new Intelligence();
+        this.plugin = plugin;
+        willpower = new NamespacedKey(this.plugin, "willpower");
+        willpowerMax = new NamespacedKey(this.plugin, "willpowerMax");
     }
 
-//    public void setWillPower(LostWorld plugin, Player player) throws SQLException {
-//        PersistentDataContainer data = player.getPersistentDataContainer();
-//
-//        int willPowerAmount = intelligence.getIntelligence(plugin, player);
-//        data.set(willpower, PersistentDataType.INTEGER, willPowerAmount * 2);
-//    }
+    public void setWillPower(Player player, int amount, boolean synchronize) {
+        PersistentDataContainer data = player.getPersistentDataContainer();
+        if (synchronize) {
+            PlayerData playerData = plugin.getPlayerDataManager().getPlayerData(player);
+            data.set(willpower, PersistentDataType.INTEGER, playerData.getIntelligence() * 2);
+            data.set(willpowerMax, PersistentDataType.INTEGER, playerData.getIntelligence() * 2);
+        } else {
+            data.set(willpower, PersistentDataType.INTEGER, amount);
+        }
+    }
 
     public int getWillPower(Player player) {
         PersistentDataContainer data = player.getPersistentDataContainer();
         return data.getOrDefault(willpower, PersistentDataType.INTEGER, 0);
     }
 
-    public void setWillPowerActionBar(Player player) {
+    public void useWillPower(Player player, int amount) {
+        int currentWillPower = getWillPower(player);
+        if (currentWillPower >= amount) {
+            setWillPower(player, currentWillPower - amount, false);
+        } else {
+            player.sendMessage(ChatColor.RED + plugin.getConfig().getString("messages.sufficient-willpower"));
+        }
+    }
+
+    public void willPowerBar(Player player) {
         PersistentDataContainer data = player.getPersistentDataContainer();
         int willPowerAmount = data.getOrDefault(willpower, PersistentDataType.INTEGER, 0);
-        ActionBar.sendActionBar(player, ChatColor.BLUE + "WillPower: " + willPowerAmount);
+        int willPowerMax = data.getOrDefault(willpowerMax, PersistentDataType.INTEGER, 0);
+        ActionBar.sendActionBar(player, ChatColor.LIGHT_PURPLE + "WillPower: " + willPowerAmount + "/" + willPowerMax);
     }
 }

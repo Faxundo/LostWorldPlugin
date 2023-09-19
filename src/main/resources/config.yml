@@ -23,3 +23,4 @@ messages:
   no-arguments: "&cThis command need arguments. Please read the documentation."
   invalid-player: "&cInvalid player."
   help: "—[ Lost World ]\n/lostworld stats\n/lostworld set\n/lostworld help"
+  sufficient-willpower: "You don't have sufficient willpower."

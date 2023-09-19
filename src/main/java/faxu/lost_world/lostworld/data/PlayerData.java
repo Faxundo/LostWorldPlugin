@@ -27,8 +27,6 @@ public class PlayerData {
     private int luck;
     @DatabaseField (canBeNull = false, defaultValue = "0")
     private int charisma;
-    @DatabaseField(canBeNull = false, defaultValue = "0")
-    private int willpower;
 
     public PlayerData() {
     }
@@ -122,6 +120,29 @@ public class PlayerData {
         return stats;
     }
 
+    public int getStat (String stat) {
+        switch (stat.toLowerCase()) {
+            case "constitution":
+                return this.constitution;
+            case "defense":
+                return this.defense;
+            case "strength":
+                return this.strength;
+            case "dextery":
+                return this.dextery;
+            case "intelligence":
+                return this.intelligence;
+            case "wisdom":
+                return this.wisdom;
+            case "luck":
+                return this.luck;
+            case "charisma":
+                return this.charisma;
+            default:
+                throw new IllegalArgumentException("Invalid stat name: " + stat);
+        }
+    }
+
     public void setStat(String stat, Integer amount) {
         switch (stat.toLowerCase()) {
             case "constitution":
@@ -152,14 +173,5 @@ public class PlayerData {
                 System.out.println("Invalid stat name: " + stat);
                 break;
         }
-    }
-
-
-    public int getWillpower() {
-        return willpower;
-    }
-
-    public void setWillpower(int willpower) {
-        this.willpower = willpower;
     }
 }

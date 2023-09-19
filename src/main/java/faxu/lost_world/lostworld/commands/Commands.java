@@ -52,6 +52,12 @@ public class Commands implements CommandExecutor {
                     plugin.getPlayerDataManager().setStat(player, args[2], Integer.parseInt(args[3]));
                     sender.sendMessage(ChatColor.GREEN + "Was Set " + args[2].toUpperCase() + " to " + args[3] + " level");
                     break;
+                case "update":
+                    if (noPerm(sender, "lostworld.updatestat")) {
+                        return true;
+                    }
+                    plugin.getPlayerDataManager().updateStat(player, args[2], Integer.parseInt(args[3]));
+                    break;
                 case "help":
                     sender.sendMessage(plugin.getConfig().getString("messages.help"));
                     break;
