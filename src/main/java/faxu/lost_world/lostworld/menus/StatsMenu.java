@@ -62,14 +62,14 @@ public class StatsMenu {
         Material skull = Material.PLAYER_HEAD;
         ItemStack item = new ItemStack(skull, 1);
         getItem(item, "&6&l" + player.getName() + "'s Stats", "",
-                "&dConstitution: " + playerData.getConstitution()
-//                "&bDefense: " + playerData.getStat("defense"),
-//                "&cStrength: " + playerData.getStat("strength"),
-//                "&2Dextery: " + playerData.getStat("dextery"),
-//                "&9Intelligence: " + playerData.getStat("intelligence"),
-//                "&5Wisdom: " + playerData.getStat("wisdom"),
-//                "&aLuck: " + playerData.getStat("luck"),
-//                "&6Charisma: " + playerData.getStat("charisma")
+                "&dConstitution: " + playerData.getConstitution(),
+                "&bDefense: " + playerData.getDefense(),
+                "&cStrength: " + playerData.getStrength(),
+                "&2Dextery: " + playerData.getDextery(),
+                "&9Intelligence: " + playerData.getIntelligence(),
+                "&5Wisdom: " + playerData.getWisdom(),
+                "&aLuck: " + playerData.getLuck(),
+                "&6Charisma: " + playerData.getCharisma()
         );
         SkullMeta meta = (SkullMeta) item.getItemMeta();
 

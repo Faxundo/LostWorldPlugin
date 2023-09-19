@@ -2,12 +2,17 @@ package faxu.lost_world.lostworld.events;
 
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.stats.Luck;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.inventory.ItemStack;
 
-import java.sql.SQLException;
+import java.util.Collection;
 
 public class BlockBreakListener implements Listener {
 
@@ -20,55 +25,54 @@ public class BlockBreakListener implements Listener {
     }
 
     @EventHandler
-    public void onBreakBlock(BlockBreakEvent event) throws SQLException {
-//        Player player = (Player) event.getPlayer();
-//        Block block = event.getBlock();
-//        Material material = block.getType();
-//
-//        if (!event.isDropItems()) {
-//            return;
-//        }
-//        if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-//
-//            ItemStack itemHand = player.getInventory().getItemInMainHand();
-//            int max = luck.getLuck(plugin, player);
-//            PlayerData playerData = new PlayerData();
-//
-//            boolean chance = false;
-//
-//            for (int i = 0; i <= 1 + (max / 10); i++) {
-//                if (!chance) {
-//                    double result = (Math.random() * (6 - 1) + 1) + max;
-//                    if (result >= 6+i) {
-//                        chance = true;
-//                    }
-//                }
-//            }
-//
-//            if (chance) {
-//                if (itemHand.containsEnchantment(Enchantment.SILK_TOUCH)) {
-//                    if (block.isPreferredTool(itemHand)) {
-//                        //Check if is a Ore or is a block descrafteable, for avoid duplications.
-//                        if (!isOre(material) && !isDescrafteable(material)) {
-//                            event.getBlock().setType(Material.AIR);
-//                            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
-//                                    new ItemStack(material, 2));
-//                        }
-//
-//
-//                    }
-//
-//
-//                } else {
-//                    Collection<ItemStack> drops = event.getBlock().getDrops();
-//                    for (ItemStack drop : drops) {
-//                        event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
-//                                drop);
-//                    }
-//
-//                }
-//            }
-//        }
+    public void onBreakBlock(BlockBreakEvent event)  {
+        Player player = (Player) event.getPlayer();
+        Block block = event.getBlock();
+        Material material = block.getType();
+
+        if (!event.isDropItems()) {
+            return;
+        }
+        if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+
+            ItemStack itemHand = player.getInventory().getItemInMainHand();
+            int max = plugin.getPlayerDataManager().getPlayerData(player).getLuck();
+
+            boolean chance = false;
+
+            for (int i = 0; i <= 1 + (max / 10); i++) {
+                if (!chance) {
+                    double result = (Math.random() * (6 - 1) + 1) + max;
+                    if (result >= 6+i) {
+                        chance = true;
+                    }
+                }
+            }
+
+            if (chance) {
+                if (itemHand.containsEnchantment(Enchantment.SILK_TOUCH)) {
+                    if (block.isPreferredTool(itemHand)) {
+                        //Check if is a Ore or is a block descrafteable, for avoid duplications.
+                        if (!isOre(material) && !isDescrafteable(material)) {
+                            event.getBlock().setType(Material.AIR);
+                            event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
+                                    new ItemStack(material, 2));
+                        }
+
+
+                    }
+
+
+                } else {
+                    Collection<ItemStack> drops = event.getBlock().getDrops();
+                    for (ItemStack drop : drops) {
+                        event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
+                                drop);
+                    }
+
+                }
+            }
+        }
     }
 
     public boolean isOre(Material material) {

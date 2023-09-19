@@ -38,11 +38,10 @@ public final class LostWorld extends JavaPlugin {
 
         //Events
         plugin.registerEvents(new PlayerJoinListener(this), this);
-//        plugin.registerEvents(new PlayerDamageListener(this), this);
-//        plugin.registerEvents(new ExpListener(this), this);
-//        plugin.registerEvents(new WorldChangeListener(this), this);
-//        plugin.registerEvents(new InventoryClickListener(), this);
-//        plugin.registerEvents(new BlockBreakListener(this), this);
+        plugin.registerEvents(new PlayerDamageListener(this), this);
+        plugin.registerEvents(new ExpListener(this), this);
+        plugin.registerEvents(new InventoryClickListener(), this);
+        plugin.registerEvents(new BlockBreakListener(this), this);
 
         //Commands
         getCommand("lostworld").setExecutor(new Commands(this));

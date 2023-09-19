@@ -1,17 +1,16 @@
 package faxu.lost_world.lostworld.stats;
 
+import faxu.lost_world.lostworld.LostWorld;
+import org.bukkit.entity.Player;
+
 public class Constitution {
 
-//    public int getConstitution(LostWorld plugin, Player player) throws SQLException {
-//        return plugin.getDatabase().getOneSkill(player, "constitution");
-//    }
-//
-//    public void setConstitution(LostWorld plugin, Player player) throws SQLException {
-//
-//        int base = plugin.getConfig().getInt("stats.default-constitution");
-//        int constitution = plugin.getDatabase().getOneSkill(player, "constitution");
-//
-//        player.setHealthScale(base + constitution);
-//    }
+    public void applyConstitution(LostWorld plugin, Player player) {
+
+        int base = plugin.getConfig().getInt("stats.default-constitution");
+        int constitution = plugin.getPlayerDataManager().getPlayerData(player).getConstitution();
+
+        player.setHealthScale(base + constitution);
+    }
 
 }

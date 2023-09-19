@@ -9,7 +9,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+
+import java.util.ArrayList;
 
 public class PlayerDamageListener implements Listener {
 
@@ -25,56 +29,55 @@ public class PlayerDamageListener implements Listener {
         dextery = new Dextery();
     }
 
-//    @EventHandler
-//    public void onDamage(EntityDamageByEntityEvent event) throws SQLException {
-//
-//        //Apply Defense
-//        if (event.getEntity() instanceof Player) {
-//            Player defender = (Player) event.getEntity();
-//            defense.setDefense(plugin, event, defender);
-//        }
-//
-//        //Apply Strength
-//        Player attacker = getDamager(event.getDamager());
-//
-//        if (attacker != null) {
-//            DamageType damageType = getDamageType(attacker);
-//
-//            ArrayList<DamageType> melee = new ArrayList<>();
-//            melee.add(DamageType.SWORD);
-//            melee.add(DamageType.AXE);
-//            melee.add(DamageType.HOE);
-//            melee.add(DamageType.PICKAXE);
-//            melee.add(DamageType.HAND);
-//            melee.add(DamageType.SHOVEL);
-//
-//            for (int i = 0; i < melee.size(); i++) {
-//                if (melee.contains(damageType)) {
-//                    strength.setStrength(plugin, event);
-//                    System.out.println("dsadasdadas");
-//                }
-//            }
-//
-//            //Apply Dextery
-//            ArrayList<DamageType> range = new ArrayList<>();
-//            range.add(DamageType.BOW);
-//            range.add(DamageType.CROSSBOW);
-//            range.add(DamageType.TRIDENT);
-//            if (plugin.getConfig().getBoolean("stats.dextery-affects-egg")) {
-//                range.add(DamageType.EGG);
-//            }
-//            if (plugin.getConfig().getBoolean("stats.dextery-affects-snowball")) {
-//                range.add(DamageType.SNOWBALL);
-//            }
-//
-//            for (int i = 0; i < range.size(); i++) {
-//                if (range.contains(damageType)) {
-//                    dextery.setDextery(plugin, event, attacker);
-//                }
-//            }
-//
-//        }
-//    }
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event) {
+
+        //Apply Defense
+        if (event.getEntity() instanceof Player) {
+            Player defender = (Player) event.getEntity();
+            defense.applyDefense(plugin, event, defender);
+        }
+
+        //Apply Strength
+        Player attacker = getDamager(event.getDamager());
+
+        if (attacker != null) {
+            DamageType damageType = getDamageType(attacker);
+
+            ArrayList<DamageType> melee = new ArrayList<>();
+            melee.add(DamageType.SWORD);
+            melee.add(DamageType.AXE);
+            melee.add(DamageType.HOE);
+            melee.add(DamageType.PICKAXE);
+            melee.add(DamageType.HAND);
+            melee.add(DamageType.SHOVEL);
+
+            for (int i = 0; i < melee.size(); i++) {
+                if (melee.contains(damageType)) {
+                    strength.applyStrength(plugin, event);
+                }
+            }
+
+            //Apply Dextery
+            ArrayList<DamageType> range = new ArrayList<>();
+            range.add(DamageType.BOW);
+            range.add(DamageType.CROSSBOW);
+            range.add(DamageType.TRIDENT);
+            if (plugin.getConfig().getBoolean("stats.dextery-affects-egg")) {
+                range.add(DamageType.EGG);
+            }
+            if (plugin.getConfig().getBoolean("stats.dextery-affects-snowball")) {
+                range.add(DamageType.SNOWBALL);
+            }
+
+            for (int i = 0; i < range.size(); i++) {
+                if (range.contains(damageType)) {
+                    dextery.applyDextery(plugin, event, attacker);
+                }
+            }
+
+        }
+    }
 
     private DamageType getDamageType(Player player) {
 

@@ -1,22 +1,22 @@
 package faxu.lost_world.lostworld.stats;
 
+import faxu.lost_world.lostworld.LostWorld;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerExpChangeEvent;
+
 public class Wisdom {
 
-//    public int getWisdom(LostWorld plugin, Player player) throws SQLException {
-//        return plugin.getDatabase().getOneSkill(player, "wisdom");
-//    }
-//
-//    public void setWisdom(LostWorld plugin, PlayerExpChangeEvent event) throws SQLException {
-//
-//        Player player = event.getPlayer();
-//
-//        int wisdom = plugin.getDatabase().getOneSkill(player, "wisdom");
-//
-//        if (wisdom != 0) {
-//            int experienceBase = event.getAmount();
-//            int experienceIncrease = (int) ((experienceBase * (wisdom * 2.5)) / 10);
-//            event.setAmount(experienceBase + experienceIncrease);
-//        }
-//
-//    }
+    public void applyWisdom(LostWorld plugin, PlayerExpChangeEvent event) {
+
+        Player player = event.getPlayer();
+
+        int wisdom = plugin.getPlayerDataManager().getPlayerData(player).getWisdom();
+
+        if (wisdom != 0) {
+            int experienceBase = event.getAmount();
+            int experienceIncrease = (int) ((experienceBase * (wisdom * 2.5)) / 10);
+            event.setAmount(experienceBase + experienceIncrease);
+        }
+
+    }
 }
