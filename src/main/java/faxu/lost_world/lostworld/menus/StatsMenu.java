@@ -3,34 +3,27 @@ package faxu.lost_world.lostworld.menus;
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.data.PlayerData;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class StatsMenu {
+public class StatsMenu extends MenuHandler {
 
     private final LostWorld plugin;
 
     public StatsMenu(LostWorld plugin) {
+        super("Stats", 9 * 5);
         this.plugin = plugin;
     }
 
     public void createMenu(LostWorld plugin, Player player, CommandSender sender) {
 
+        Inventory inv = Bukkit.createInventory(player, invSize, invName);
 
-        Inventory inv = Bukkit.createInventory(player, 9 * 5, "Stats");
-
-        for (int i = 0; i < (9 * 5); i++) {
-            inv.setItem(i, new ItemStack(Material.BLACK_STAINED_GLASS_PANE));
-        }
+        fillMenu(invSize, inv);
 
         inv.setItem(22, getHead(player));
         inv.setItem(10, getItem(new ItemStack(Material.PINK_STAINED_GLASS),
@@ -62,6 +55,8 @@ public class StatsMenu {
         Material skull = Material.PLAYER_HEAD;
         ItemStack item = new ItemStack(skull, 1);
         getItem(item, "&6&l" + player.getName() + "'s Stats", "",
+                "&eRace: " + playerData.getRace().getName(),
+                " ",
                 "&dConstitution: " + playerData.getConstitution(),
                 "&bDefense: " + playerData.getDefense(),
                 "&cStrength: " + playerData.getStrength(),
@@ -76,24 +71,6 @@ public class StatsMenu {
         meta.setOwningPlayer(player);
 
         item.setItemMeta(meta);
-        return item;
-    }
-
-
-    private ItemStack getItem(ItemStack item, String name, String... lore) {
-
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
-
-        List<String> lores = new ArrayList<>();
-
-        for (String s : lore) {
-            lores.add(ChatColor.translateAlternateColorCodes('&', s));
-        }
-        meta.setLore(lores);
-
-        item.setItemMeta(meta);
-
         return item;
     }
 }

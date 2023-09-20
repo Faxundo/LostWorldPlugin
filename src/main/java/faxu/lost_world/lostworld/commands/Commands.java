@@ -1,6 +1,7 @@
 package faxu.lost_world.lostworld.commands;
 
 import faxu.lost_world.lostworld.LostWorld;
+import faxu.lost_world.lostworld.menus.RaceMenu;
 import faxu.lost_world.lostworld.menus.StatsMenu;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,10 +13,12 @@ public class Commands implements CommandExecutor {
 
     private final LostWorld plugin;
     private final StatsMenu statsMenu;
+    private final RaceMenu raceMenu;
 
     public Commands(LostWorld plugin) {
         this.plugin = plugin;
         statsMenu = new StatsMenu(this.plugin);
+        raceMenu = new RaceMenu(this.plugin);
     }
 
     public boolean noPerm(CommandSender sender, String perm) {
@@ -37,7 +40,6 @@ public class Commands implements CommandExecutor {
                 return true;
             }
 
-
             switch (args[0]) {
                 case "stats":
                     if (noPerm(sender, "lostworld.seestats")) {
@@ -57,6 +59,9 @@ public class Commands implements CommandExecutor {
                         return true;
                     }
                     plugin.getPlayerDataManager().updateStat(player, args[2], Integer.parseInt(args[3]));
+                    break;
+                case "races":
+                    raceMenu.createMenu(plugin, player, sender);
                     break;
                 case "help":
                     sender.sendMessage(plugin.getConfig().getString("messages.help"));

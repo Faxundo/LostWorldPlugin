@@ -31,9 +31,12 @@ public class PlayerJoinListener implements Listener {
         if (!plugin.getPlayerDataManager().playerExists(player)) {
             plugin.getPlayerDataManager().addPlayer(player);
         }
+        if (plugin.getPlayerDataManager().getPlayerData(player).getRace() == null) {
+            plugin.getPlayerDataManager().setRace(player, plugin.getRaceDataManager().getRaceByName("Soul"));
+        }
         constitution.applyConstitution(plugin, player);
         luck.applyLuck(plugin, player);
-        willpower.setWillPower(player, 0 , true);
+        willpower.setWillPower(player, 0, true);
 
 
         new BukkitRunnable() {

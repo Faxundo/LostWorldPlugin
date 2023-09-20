@@ -3,6 +3,7 @@ package faxu.lost_world.lostworld;
 import faxu.lost_world.lostworld.commands.Commands;
 import faxu.lost_world.lostworld.data.Database;
 import faxu.lost_world.lostworld.data.PlayerDataManager;
+import faxu.lost_world.lostworld.data.races.RaceDataManager;
 import faxu.lost_world.lostworld.events.*;
 import faxu.lost_world.lostworld.util.DelayedTask;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ public final class LostWorld extends JavaPlugin {
     private final PluginManager plugin = Bukkit.getServer().getPluginManager();
     private Database database;
     private PlayerDataManager playerDataManager;
+    private RaceDataManager raceDataManager;
 
     @Override
     public void onEnable() {
@@ -27,7 +29,12 @@ public final class LostWorld extends JavaPlugin {
             }
 
             database = new Database(getDataFolder().getAbsolutePath() + "/lostworlddb.db");
-            playerDataManager = new PlayerDataManager(database);
+            //Player Data
+            playerDataManager = new PlayerDataManager(this, database);
+
+            //Races Data
+            raceDataManager = new RaceDataManager(this, database);
+            raceDataManager.createRaces();
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -40,7 +47,7 @@ public final class LostWorld extends JavaPlugin {
         plugin.registerEvents(new PlayerJoinListener(this), this);
         plugin.registerEvents(new PlayerDamageListener(this), this);
         plugin.registerEvents(new ExpListener(this), this);
-        plugin.registerEvents(new InventoryClickListener(), this);
+        plugin.registerEvents(new InventoryClickListener(this), this);
         plugin.registerEvents(new BlockBreakListener(this), this);
 
         //Commands
@@ -64,4 +71,9 @@ public final class LostWorld extends JavaPlugin {
     public PlayerDataManager getPlayerDataManager () {
         return this.playerDataManager;
     }
+
+    public RaceDataManager getRaceDataManager () {
+        return this.raceDataManager;
+    }
+
 }

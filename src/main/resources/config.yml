@@ -22,5 +22,11 @@ messages:
   no-perms: "&cYou don't have permissions for this."
   no-arguments: "&cThis command need arguments. Please read the documentation."
   invalid-player: "&cInvalid player."
-  help: "—[ Lost World ]\n/lostworld stats\n/lostworld set\n/lostworld help"
+  help:
+    - "-----[ Lost World ]-----"
+    - "/lostworld stats <player>: Show stats of selected player."
+    - "/lostworld set <player> <stat> <amount>: Set selected stat in the determined amount."
+    - "/lostworld races: Open a Menu for select one race."
+    - "/lostworld help: Show this."
+    - "------------------------"
   sufficient-willpower: "You don't have sufficient willpower."

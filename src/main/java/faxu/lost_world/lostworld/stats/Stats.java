@@ -1,4 +1,4 @@
-package faxu.lost_world.lostworld.util;
+package faxu.lost_world.lostworld.stats;
 
 public enum Stats {
 
