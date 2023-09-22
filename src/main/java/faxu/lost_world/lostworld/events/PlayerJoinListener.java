@@ -2,6 +2,7 @@ package faxu.lost_world.lostworld.events;
 
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.data.PlayerDataManager;
+import faxu.lost_world.lostworld.races.Races;
 import faxu.lost_world.lostworld.stats.Constitution;
 import faxu.lost_world.lostworld.stats.Luck;
 import faxu.lost_world.lostworld.willpower.Willpower;
@@ -35,7 +36,7 @@ public class PlayerJoinListener implements Listener {
             playerDataManager.addPlayer(player);
         }
         if (playerDataManager.getPlayerData(player).getRace() == null) {
-            playerDataManager.setRace(player, plugin.getRaceDataManager().getRaceByName("Soul"));
+            playerDataManager.setRace(player, plugin.getRaceDataManager().getRaceByName(Races.SOUL.getName()));
         }
         constitution.applyConstitution(plugin, player);
         luck.applyLuck(plugin, player);

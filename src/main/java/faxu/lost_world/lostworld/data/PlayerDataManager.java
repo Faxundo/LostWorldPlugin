@@ -33,16 +33,14 @@ public class PlayerDataManager {
         return null;
     }
 
-    public PlayerData addPlayer(Player player) {
+    public void addPlayer(Player player) {
         PlayerData playerData = new PlayerData();
         playerData.setUuid(player.getUniqueId().toString());
         try {
             playerDataDao.create(playerData);
-            return playerData;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
     }
 
     public boolean playerExists(Player player) {

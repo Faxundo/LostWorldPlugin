@@ -39,13 +39,13 @@ public class InventoryClickListener implements Listener {
             RaceData raceData = new RaceData();
 
             if (slot == 10) {
-                raceData = raceDataManager.getRaceByName(Races.HUMAN.name());
+                raceData = raceDataManager.getRaceByName(Races.HUMAN.getName());
             } else if (slot == 12) {
-                raceData = raceDataManager.getRaceByName(Races.ORC.name());
+                raceData = raceDataManager.getRaceByName(Races.ORC.getName());
             } else if (slot == 14) {
-                raceData = raceDataManager.getRaceByName(Races.ELF.name());
+                raceData = raceDataManager.getRaceByName(Races.ELF.getName());
             } else if (slot == 16) {
-                raceData = raceDataManager.getRaceByName(Races.DWARF.name());
+                raceData = raceDataManager.getRaceByName(Races.DWARF.getName());
             }
             //Avoid you set the same race has you have.
             if (!playerDataManager.getPlayerData(player).getRace().equals(raceData)) {

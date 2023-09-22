@@ -8,19 +8,19 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-public class Dextery {
+public class Dexterity {
 
-    public void applyDextery(LostWorld plugin, EntityDamageByEntityEvent event, Player player) {
+    public void applyDexterity(LostWorld plugin, EntityDamageByEntityEvent event, Player player) {
 
-        double dextery = plugin.getPlayerDataManager().getPlayerData(player).getDextery();
+        double dexterity = plugin.getPlayerDataManager().getPlayerData(player).getDexterity();
 
         if (event.getCause() == EntityDamageEvent.DamageCause.PROJECTILE) {
             if (event.getEntity().getType() == EntityType.TRIDENT) {
-                event.setDamage(event.getDamage() + (dextery / 1.5));
+                event.setDamage(event.getDamage() + (dexterity / 1.5));
             } else if (event.getDamager() instanceof Snowball || event.getDamager() instanceof Egg) {
-                event.setDamage(event.getDamage() + (dextery / 4));
+                event.setDamage(event.getDamage() + (dexterity / 4));
             } else {
-                event.setDamage(event.getDamage() + (dextery / 2));
+                event.setDamage(event.getDamage() + (dexterity / 2));
             }
         }
 

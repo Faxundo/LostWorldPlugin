@@ -11,27 +11,27 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ForestDweller implements Listener {
+public class PathOfTheReaver implements Listener {
 
     private final LostWorld plugin;
     FileConfiguration config;
     private Map<String, Integer> modifiers;
     private NamespacedKey hasEffect;
     private final BiomeAbilityHandler biomeAbilityHandler;
-    private final String abilityName = "Forest-Dweller";
+    private final String abilityName = "Path-Of-The-Reaver";
 
-    public ForestDweller(LostWorld plugin) {
+    public PathOfTheReaver(LostWorld plugin) {
         this.plugin = plugin;
         config = plugin.getConfig();
         modifiers = new HashMap<>();
-        hasEffect = new NamespacedKey(plugin, "ForestDweller");
+        hasEffect = new NamespacedKey(plugin, "PathOfTheReaver");
         biomeAbilityHandler = new BiomeAbilityHandler(plugin);
     }
 
     @EventHandler
     public void onMoveListener(PlayerMoveEvent event) {
         biomeAbilityHandler.setRacialModifiers(abilityName, modifiers);
-        biomeAbilityHandler.applyEffect(event, Races.ELF.getName(), abilityName,
-                modifiers, hasEffect, "forest-enter", "forest-left");
+        biomeAbilityHandler.applyEffect(event, Races.ORC.getName(), abilityName,
+                modifiers, hasEffect, "path-reaver-enter", "path-reaver-left");
     }
 }

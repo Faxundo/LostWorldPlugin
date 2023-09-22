@@ -5,7 +5,10 @@ import faxu.lost_world.lostworld.data.Database;
 import faxu.lost_world.lostworld.data.PlayerDataManager;
 import faxu.lost_world.lostworld.data.races.RaceDataManager;
 import faxu.lost_world.lostworld.events.*;
+import faxu.lost_world.lostworld.races.abilities.CaveAndCliffsLife;
+import faxu.lost_world.lostworld.races.abilities.CivilizationWalker;
 import faxu.lost_world.lostworld.races.abilities.ForestDweller;
+import faxu.lost_world.lostworld.races.abilities.PathOfTheReaver;
 import faxu.lost_world.lostworld.util.DelayedTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -56,6 +59,9 @@ public final class LostWorld extends JavaPlugin {
 
         //Abilities
         plugin.registerEvents(new ForestDweller(this), this);
+        plugin.registerEvents(new CivilizationWalker(this), this);
+        plugin.registerEvents(new CaveAndCliffsLife(this), this);
+        plugin.registerEvents(new PathOfTheReaver(this), this);
 
         //Process
         saveDefaultConfig();

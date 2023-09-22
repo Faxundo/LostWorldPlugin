@@ -37,7 +37,7 @@ public class StatsMenu extends MenuHandler {
         inv.setItem(14, getItem(new ItemStack(Material.RED_STAINED_GLASS),
                 config.getString("names.strength"), config.getString("descriptions.strength")));
         inv.setItem(16, getItem(new ItemStack(Material.GREEN_STAINED_GLASS),
-                config.getString("names.dextery"), config.getString("descriptions.dextery")));
+                config.getString("names.dexterity"), config.getString("descriptions.dexterity")));
         inv.setItem(28, getItem(new ItemStack(Material.BLUE_STAINED_GLASS),
                 config.getString("names.intelligence"), config.getString("descriptions.intelligence")));
         inv.setItem(30, getItem(new ItemStack(Material.PURPLE_STAINED_GLASS),
@@ -65,7 +65,7 @@ public class StatsMenu extends MenuHandler {
                 config.get("names.constitution") + ": " + playerData.getConstitution(),
                 config.get("names.defense") + ": " + playerData.getDefense(),
                 config.get("names.strength") + ": " + playerData.getStrength(),
-                config.get("names.dextery") + ": " + playerData.getDextery(),
+                config.get("names.dexterity") + ": " + playerData.getDexterity(),
                 config.get("names.intelligence") + ": " + playerData.getIntelligence(),
                 config.get("names.wisdom") + ": " + playerData.getWisdom(),
                 config.get("names.luck") + ": " + playerData.getLuck(),

@@ -3,7 +3,9 @@ package faxu.lost_world.lostworld.data.races;
 import com.j256.ormlite.dao.Dao;
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.data.Database;
+import faxu.lost_world.lostworld.data.PlayerData;
 import faxu.lost_world.lostworld.races.*;
+import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
 import java.util.Arrays;
@@ -51,14 +53,12 @@ public class RaceDataManager {
         }
     }
 
-    public RaceData addRace(RaceData raceData) {
+    public void addRace(RaceData raceData) {
         try {
             raceDataDao.create(raceData);
-            return raceData;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
     }
 
     public RaceData getRaceByName(String name) {
@@ -81,5 +81,11 @@ public class RaceDataManager {
 
     public List listRaces() throws SQLException {
         return raceDataDao.queryForAll();
+    }
+
+    public boolean isRace (Player player, String race) {
+        PlayerData playerData = plugin.getPlayerDataManager().getPlayerData(player);
+        RaceData raceData = playerData.getRace();
+        return raceData.getName().equals(race);
     }
 }

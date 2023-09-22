@@ -4,21 +4,54 @@ stats:
   # Remember 2 points of life = 1 Heart
   # Vanilla Default = 20
   default-constitution: 20
-  dextery-affects-snowball: false
-  dextery-affects-egg: true
+  dexterity-affects-snowball: false
+  dexterity-affects-egg: true
 
 racial-abilities:
+  civilization-walker:
+    constitution: 1
+    defense: 1
+    strength: 1
+    dexterity: 1
+    intelligence: 1
+    wisdom: 1
+    luck: 1
+    charisma: 1
   forest-dweller:
-    dextery: 4
+    constitution: 0
+    defense: 0
+    strength: 0
+    dexterity: 4
     intelligence: 2
     wisdom: 2
+    luck: 0
+    charisma: 0
+  cave-and-cliffs-life:
+    constitution: 2
+    defense: 0
+    strength: 1
+    dexterity: 0
+    intelligence: 0
+    wisdom: 2
+    luck: 0
+    charisma: 3
+  path-of-the-reaver:
+    constitution: 4
+    defense: 2
+    strength: 2
+    dexterity: 0
+    intelligence: 0
+    wisdom: 0
+    luck: 0
+    charisma: 0
+
 
 names:
 #Stats
   constitution: "&dConstitution"
   defense: "&bDefense"
   strength: "&cStrength"
-  dextery: "&2Dextery"
+  dexterity: "&2Dexterity"
   intelligence: "&9Intelligence"
   wisdom: "&5Wisdom"
   luck: "&aLuck"
@@ -44,7 +77,7 @@ descriptions:
   constitution: "&eIncreases your health."
   defense: "&eReduces the incoming damage."
   strength: "&eIncreases the melee damage."
-  dextery: "&eIncreases the range damage."
+  dexterity: "&eIncreases the range damage."
   intelligence: "&eDefine your willpower"
   wisdom: "&eIncreases the experience obtained."
   luck: "&eUseful for fishing, some loot tables of chests and for obtain more loot at mine blocks."
@@ -64,5 +97,11 @@ messages:
   sufficient-willpower: "&cYou don't have sufficient willpower."
 
   abilities:
+    civilization-enter: "You have entered a biome where civilization may exist..."
+    civilization-left: "The possibilities of civilization have been left behind"
     forest-enter: "You entered a forest..."
     forest-left: "You came out of a forest..."
+    cave-or-cliffs-enter: "Have you arrived at a cave... or a mountain?"
+    cave-or-cliffs-left: "You have left your ancestral lands behind..."
+    path-reaver-enter: "Have these lands already been looted?"
+    path-reaver-left: "Apparently... there was nothing interesting there"

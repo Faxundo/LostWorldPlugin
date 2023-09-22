@@ -5,7 +5,7 @@ public enum Stats {
     CONSTITUTION,
     DEFENSE,
     STRENGTH,
-    DEXTERY,
+    DEXTERITY,
     INTELLIGENCE,
     WISDOM,
     LUCK,
