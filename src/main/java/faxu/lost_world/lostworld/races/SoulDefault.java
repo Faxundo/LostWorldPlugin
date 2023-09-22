@@ -1,6 +1,7 @@
 package faxu.lost_world.lostworld.races;
 
 import faxu.lost_world.lostworld.data.races.RaceData;
+import faxu.lost_world.lostworld.races.abilities.Abilities;
 import faxu.lost_world.lostworld.stats.Stats;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ public class SoulDefault extends RaceData {
 
     public SoulDefault() {
         name = Races.SOUL.name();
-        passiveAbility = "None";
+        passiveAbility = Abilities.NONE.name();
         defaultStats = new HashMap<>();
         defaultStats.put(Stats.CONSTITUTION.name().toLowerCase(), 0);
         defaultStats.put(Stats.DEFENSE.name().toLowerCase(), 0);

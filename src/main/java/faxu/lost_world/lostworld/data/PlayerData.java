@@ -31,7 +31,10 @@ public class PlayerData {
     @DatabaseField(foreign = true, foreignColumnName = "id", foreignAutoRefresh = true)
     private RaceData race;
 
+    private HashMap<String, Integer> statsModifiers;
+
     public PlayerData() {
+        statsModifiers = new HashMap<>();
     }
 
     public String getUuid() {
@@ -112,6 +115,14 @@ public class PlayerData {
 
     public void setRace(RaceData race) {
         this.race = race;
+    }
+
+    public HashMap<String, Integer> getstatsModifiers () {
+        return statsModifiers;
+    }
+
+    public void setStatsModifiers (HashMap<String, Integer> statsModifiers) {
+        this.statsModifiers = statsModifiers;
     }
 
     public HashMap<String, Integer> getStats() {

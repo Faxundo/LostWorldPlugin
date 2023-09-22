@@ -7,7 +7,40 @@ stats:
   dextery-affects-snowball: false
   dextery-affects-egg: true
 
+racial-abilities:
+  forest-dweller:
+    dextery: 4
+    intelligence: 2
+    wisdom: 2
+
+names:
+#Stats
+  constitution: "&dConstitution"
+  defense: "&bDefense"
+  strength: "&cStrength"
+  dextery: "&2Dextery"
+  intelligence: "&9Intelligence"
+  wisdom: "&5Wisdom"
+  luck: "&aLuck"
+  charisma: "&6Charisma"
+  willpower: "Willpower" #This no admit '&' symbol
+
+#Races
+  race: "&eRace"
+  human: "&6&lHuman"
+  orc: "&6&lOrc"
+  elf: "&6&lElf"
+  dwarf: "&6&lDwarf"
+
+#Abilities
+  ability: "&eAbility"
+
+#GUI
+  invstats: "Stats"
+  invrace: "Races"
+
 descriptions:
+#Stats
   constitution: "&eIncreases your health."
   defense: "&eReduces the incoming damage."
   strength: "&eIncreases the melee damage."
@@ -15,18 +48,21 @@ descriptions:
   intelligence: "&eDefine your willpower"
   wisdom: "&eIncreases the experience obtained."
   luck: "&eUseful for fishing, some loot tables of chests and for obtain more loot at mine blocks."
-  charisma: ""
+  charisma: "&eCharisma"
+
+#Races
+  human: "&eChange you race to Human"
+  orc: "&eChange you race to Orc"
+  elf: "&eChange you race to Elf"
+  dwarf: "&eChange you race to Dwarf"
 
 messages:
   sql-error: "&cSQL error, please report to administrator."
   no-perms: "&cYou don't have permissions for this."
   no-arguments: "&cThis command need arguments. Please read the documentation."
   invalid-player: "&cInvalid player."
-  help:
-    - "-----[ Lost World ]-----"
-    - "/lostworld stats <player>: Show stats of selected player."
-    - "/lostworld set <player> <stat> <amount>: Set selected stat in the determined amount."
-    - "/lostworld races: Open a Menu for select one race."
-    - "/lostworld help: Show this."
-    - "------------------------"
-  sufficient-willpower: "You don't have sufficient willpower."
+  sufficient-willpower: "&cYou don't have sufficient willpower."
+
+  abilities:
+    forest-enter: "You entered a forest..."
+    forest-left: "You came out of a forest..."

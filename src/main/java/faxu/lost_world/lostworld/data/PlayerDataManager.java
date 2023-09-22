@@ -77,11 +77,15 @@ public class PlayerDataManager {
         }
     }
 
-    //Adds a amount to selected stat
-    public void updateStat(Player player, String stat, Integer amount) {
+    //Adds amount to selected stat
+    public void updateStat(Player player, String stat, String operator, Integer amount) {
         PlayerData playerData = getPlayerData(player);
         int value = playerData.getStat(stat);
-        playerData.setStat(stat, value + amount);
+        if (operator.equals("add")) {
+            playerData.setStat(stat, value + amount);
+        } else if (operator.equals("sub")) {
+            playerData.setStat(stat, value - amount);
+        }
         try {
             playerDataDao.update(playerData);
         } catch (SQLException ex) {

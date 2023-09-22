@@ -39,43 +39,44 @@ public class PlayerDamageListener implements Listener {
         }
 
         //Apply Strength
-        Player attacker = getDamager(event.getDamager());
+        if (event.getDamager() instanceof Player) {
+            Player attacker = getDamager(event.getDamager());
 
-        if (attacker != null) {
-            DamageType damageType = getDamageType(attacker);
+            if (attacker != null) {
+                DamageType damageType = getDamageType(attacker);
 
-            ArrayList<DamageType> melee = new ArrayList<>();
-            melee.add(DamageType.SWORD);
-            melee.add(DamageType.AXE);
-            melee.add(DamageType.HOE);
-            melee.add(DamageType.PICKAXE);
-            melee.add(DamageType.HAND);
-            melee.add(DamageType.SHOVEL);
+                ArrayList<DamageType> melee = new ArrayList<>();
+                melee.add(DamageType.SWORD);
+                melee.add(DamageType.AXE);
+                melee.add(DamageType.HOE);
+                melee.add(DamageType.PICKAXE);
+                melee.add(DamageType.HAND);
+                melee.add(DamageType.SHOVEL);
 
-            for (int i = 0; i < melee.size(); i++) {
-                if (melee.contains(damageType)) {
-                    strength.applyStrength(plugin, event);
+                for (int i = 0; i < melee.size(); i++) {
+                    if (melee.contains(damageType)) {
+                        strength.applyStrength(plugin, event);
+                    }
+                }
+
+                //Apply Dextery
+                ArrayList<DamageType> range = new ArrayList<>();
+                range.add(DamageType.BOW);
+                range.add(DamageType.CROSSBOW);
+                range.add(DamageType.TRIDENT);
+                if (plugin.getConfig().getBoolean("stats.dextery-affects-egg")) {
+                    range.add(DamageType.EGG);
+                }
+                if (plugin.getConfig().getBoolean("stats.dextery-affects-snowball")) {
+                    range.add(DamageType.SNOWBALL);
+                }
+
+                for (int i = 0; i < range.size(); i++) {
+                    if (range.contains(damageType)) {
+                        dextery.applyDextery(plugin, event, attacker);
+                    }
                 }
             }
-
-            //Apply Dextery
-            ArrayList<DamageType> range = new ArrayList<>();
-            range.add(DamageType.BOW);
-            range.add(DamageType.CROSSBOW);
-            range.add(DamageType.TRIDENT);
-            if (plugin.getConfig().getBoolean("stats.dextery-affects-egg")) {
-                range.add(DamageType.EGG);
-            }
-            if (plugin.getConfig().getBoolean("stats.dextery-affects-snowball")) {
-                range.add(DamageType.SNOWBALL);
-            }
-
-            for (int i = 0; i < range.size(); i++) {
-                if (range.contains(damageType)) {
-                    dextery.applyDextery(plugin, event, attacker);
-                }
-            }
-
         }
     }
 

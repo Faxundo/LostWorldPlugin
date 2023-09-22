@@ -1,10 +1,11 @@
 package faxu.lost_world.lostworld;
 
-import faxu.lost_world.lostworld.commands.Commands;
+import faxu.lost_world.lostworld.commands.CommandManager;
 import faxu.lost_world.lostworld.data.Database;
 import faxu.lost_world.lostworld.data.PlayerDataManager;
 import faxu.lost_world.lostworld.data.races.RaceDataManager;
 import faxu.lost_world.lostworld.events.*;
+import faxu.lost_world.lostworld.races.abilities.ForestDweller;
 import faxu.lost_world.lostworld.util.DelayedTask;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -51,7 +52,10 @@ public final class LostWorld extends JavaPlugin {
         plugin.registerEvents(new BlockBreakListener(this), this);
 
         //Commands
-        getCommand("lostworld").setExecutor(new Commands(this));
+        getCommand("lostworld").setExecutor(new CommandManager(this));
+
+        //Abilities
+        plugin.registerEvents(new ForestDweller(this), this);
 
         //Process
         saveDefaultConfig();

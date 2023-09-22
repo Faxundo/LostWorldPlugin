@@ -1,6 +1,7 @@
 package faxu.lost_world.lostworld.events;
 
 import faxu.lost_world.lostworld.LostWorld;
+import faxu.lost_world.lostworld.data.PlayerDataManager;
 import faxu.lost_world.lostworld.stats.Constitution;
 import faxu.lost_world.lostworld.stats.Luck;
 import faxu.lost_world.lostworld.willpower.Willpower;
@@ -16,9 +17,11 @@ public class PlayerJoinListener implements Listener {
     private Constitution constitution;
     private Luck luck;
     private Willpower willpower;
+    private PlayerDataManager playerDataManager;
 
     public PlayerJoinListener(LostWorld plugin) {
         this.plugin = plugin;
+        playerDataManager = plugin.getPlayerDataManager();
         constitution = new Constitution();
         luck = new Luck();
         willpower = new Willpower(plugin);
@@ -28,16 +31,15 @@ public class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if (!plugin.getPlayerDataManager().playerExists(player)) {
-            plugin.getPlayerDataManager().addPlayer(player);
+        if (!playerDataManager.playerExists(player)) {
+            playerDataManager.addPlayer(player);
         }
-        if (plugin.getPlayerDataManager().getPlayerData(player).getRace() == null) {
-            plugin.getPlayerDataManager().setRace(player, plugin.getRaceDataManager().getRaceByName("Soul"));
+        if (playerDataManager.getPlayerData(player).getRace() == null) {
+            playerDataManager.setRace(player, plugin.getRaceDataManager().getRaceByName("Soul"));
         }
         constitution.applyConstitution(plugin, player);
         luck.applyLuck(plugin, player);
         willpower.setWillPower(player, 0, true);
-
 
         new BukkitRunnable() {
 

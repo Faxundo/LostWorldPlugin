@@ -1,6 +1,7 @@
 package faxu.lost_world.lostworld.races;
 
 import faxu.lost_world.lostworld.data.races.RaceData;
+import faxu.lost_world.lostworld.races.abilities.Abilities;
 import faxu.lost_world.lostworld.stats.Stats;
 
 import java.util.HashMap;
@@ -9,7 +10,7 @@ public class DwarfRace extends RaceData {
 
     public DwarfRace() {
         name = Races.DWARF.name();
-        passiveAbility = "CaveLife";
+        passiveAbility = Abilities.CAVELIFE.name();
         defaultStats = new HashMap<>();
         defaultStats.put(Stats.CONSTITUTION.name().toLowerCase(), 4);
         defaultStats.put(Stats.DEFENSE.name().toLowerCase(), 0);

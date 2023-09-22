@@ -13,11 +13,11 @@ public class RaceDataManager {
 
     private Dao<RaceData, String> raceDataDao;
     private final LostWorld plugin;
-    private SoulDefault soulDefault;
-    private HumanRace humanRace;
-    private OrcRace orcRace;
-    private ElfRace elfRace;
-    private DwarfRace dwarfRace;
+    private final SoulDefault soulDefault;
+    private final HumanRace humanRace;
+    private final OrcRace orcRace;
+    private final ElfRace elfRace;
+    private final DwarfRace dwarfRace;
 
 
     public RaceDataManager(LostWorld plugin, Database database) {
