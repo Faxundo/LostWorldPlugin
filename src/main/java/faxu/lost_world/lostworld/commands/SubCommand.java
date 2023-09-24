@@ -14,9 +14,9 @@ public abstract class SubCommand {
     public abstract String getSyntax();
 
     public boolean hasPerm(LostWorld plugin, CommandSender sender, String perm) {
-        if (sender.hasPermission(perm)) return false;
+        if (sender.hasPermission(perm)) return true;
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().getString("messages.no-perms")));
-        return true;
+        return false;
     }
 
     public abstract void perform(Player player, String[] args);

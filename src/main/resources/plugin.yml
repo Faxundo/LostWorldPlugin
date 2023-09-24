@@ -3,21 +3,22 @@ version: '${project.version}'
 main: faxu.lost_world.lostworld.LostWorld
 api-version: 1.20
 author: Faxu
+website: https://github.com/Faxundo/LostWorldPlugin
 description: Races, stats, classes and skills!
 commands:
   lostworld:
     description: Main command of plugin LostWorld.
     usage: /lostworld
 permissions:
-  seestats:
+  lostworld.seestats:
     description: Show stats of selected player.
     default: true
-  setstat:
+  lostworld.setstat:
     description: Sets the stat amount of the selected player.
     default: op
-  updatestat:
+  lostworld.updatestat:
     description: Increase the stat of the selected player.
     default: op
-  races:
+  lostworld.races:
     description: Shows existing breeds for you to choose one.
     default: true

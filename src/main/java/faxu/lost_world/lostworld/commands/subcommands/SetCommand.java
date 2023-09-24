@@ -33,7 +33,7 @@ public class SetCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if (args.length > 1) {
             Player target = Bukkit.getPlayer(args[1]);
-            if (target != null && !hasPerm(plugin, player, "lostworld.setstats")) {
+            if (target != null && hasPerm(plugin, player, "lostworld.setstats")) {
                 plugin.getPlayerDataManager().setStat(player, args[2], Integer.parseInt(args[3]));
                 player.sendMessage(ChatColor.GREEN + "Was Set " + args[2].toUpperCase() + " to " + args[3] + " level");
             }

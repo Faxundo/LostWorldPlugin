@@ -39,6 +39,11 @@ public class Willpower {
         return data.getOrDefault(willpower, PersistentDataType.INTEGER, 0);
     }
 
+    public int getMaxWillPower(Player player) {
+        PersistentDataContainer data = player.getPersistentDataContainer();
+        return data.getOrDefault(willpowerMax, PersistentDataType.INTEGER, 0);
+    }
+
     public void useWillPower(Player player, int amount) {
         int currentWillPower = getWillPower(player);
         if (currentWillPower >= amount) {
@@ -49,9 +54,8 @@ public class Willpower {
     }
 
     public void willPowerBar(Player player) {
-        PersistentDataContainer data = player.getPersistentDataContainer();
-        int willPowerAmount = data.getOrDefault(willpower, PersistentDataType.INTEGER, 0);
-        int willPowerMax = data.getOrDefault(willpowerMax, PersistentDataType.INTEGER, 0);
+        int willPowerAmount = getWillPower(player);
+        int willPowerMax = getMaxWillPower(player);
         ActionBar.sendActionBar(player, ChatColor.LIGHT_PURPLE + config.getString("names.willpower") + ": " + willPowerAmount + "/" + willPowerMax);
     }
 }

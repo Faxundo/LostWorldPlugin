@@ -1,0 +1,119 @@
+# Plugin hecho por Faxu
+
+#Reemplace el otro config.yml con este.
+
+stats:
+  # Recuerda que 2 puntos de Vida es igual a 1 corazón.
+  # En vanilla el default es 20
+  default-constitution: 20
+  dexterity-affects-snowball: false
+  dexterity-affects-egg: true
+
+racial-abilities:
+  civilization-walker:
+    constitution: 1
+    defense: 1
+    strength: 1
+    dexterity: 1
+    intelligence: 1
+    wisdom: 1
+    luck: 1
+    charisma: 1
+  forest-dweller:
+    constitution: 0
+    defense: 0
+    strength: 0
+    dexterity: 4
+    intelligence: 2
+    wisdom: 2
+    luck: 0
+    charisma: 0
+  cave-and-cliffs-life:
+    constitution: 2
+    defense: 0
+    strength: 1
+    dexterity: 0
+    intelligence: 0
+    wisdom: 2
+    luck: 0
+    charisma: 3
+  path-of-the-reaver:
+    constitution: 4
+    defense: 2
+    strength: 2
+    dexterity: 0
+    intelligence: 0
+    wisdom: 0
+    luck: 0
+    charisma: 0
+
+
+names:
+  #Estadísticas
+  constitution: "&dConstitución"
+  defense: "&bDefensa"
+  strength: "&cFuerza"
+  dexterity: "&2Destreza"
+  intelligence: "&9Inteligencia"
+  wisdom: "&5Sabiduría"
+  luck: "&aSuerte"
+  charisma: "&6Carisma"
+  willpower: "Voluntad" #No admite el símbolo '&'
+
+  #Razas
+  race: "&eRaza"
+  human: "&6&lHumano"
+  orc: "&6&lOrco"
+  elf: "&6&lElfo"
+  dwarf: "&6&lEnano"
+
+  #Habilidades
+  ability: "&eHabilidad"
+
+  #GUI
+  invstats: "Estadísticas"
+  invrace: "Razas"
+
+descriptions:
+  #Estadísticas
+  constitution: "&eIncrementa tu vida.
+  
+  &fEach point is one point of health"
+  defense: "&eReduce el daño recibido."
+  strength: "&eIncrementa el daño provocado cuerpo a cuerpo."
+  dexterity: "&eIncrementa el daño provocado a distancia."
+  intelligence: "&eDefine tu Voluntad."
+  wisdom: "&eAumenta la experiencia obtenida."
+  luck: "&eÚtil a la hora de pescar, algunas loot tables pueden estar involucradas y puedes obtener más bloques al minar."
+  charisma: "&eCarisma"
+
+  #Razas
+  human.description: "&eCambia tu raza a humano.\nUna raza balanceada con mucha suerte."
+  human-ability: "&aCamino de la Civilización: &fCuando estés en un bioma que pueda tener pueblos, obtienes &6+1 &fa todas tus estadísticas."
+  human-stats: "Estadísticas iniciales:\n&6Todas las estadísticas: +1\n&aSuerte: 3"
+  orc-description: "&eCambia tu raza a Orco.\n&fUna conflictiva raza centrada en el combate"
+  orc-ability: "Camino del Saqueador: &fCuando estés en un bioma abandonado de vida, obtienes &d+4 &fde Constitución, &c+2 &fde Fuerza y &b+2 &fde Defensa."
+  orc-stats: "Estadísticas iniciales:\n&dConstitución: 4\n&bDefensa: 2\n&cFuerza: 3\n&9Inteligencia: 1"
+  elf-description: "&eCambia tu raza a Elfo.\n&fUna antigua raza con una incontable cantidad de conocimiento."
+  elf-ability: "&aCaminante Forestal: &fCuando estés en un bioma de bosque, obtienes &2+4 &fde Destreza, &9+2 &fde Inteligencia y &5+2 &fde Sabiduría."
+  elf-stats: "Estadísticas iniciales:\n&2Destreza: 2\n&9Inteligencia: 4\n&5Sabiduría: 4"
+  dwarf-description: "&eCambia tu raza a Enano.\n&fUna resistente y codiciosa raza."
+  dwarf-ability: "&aCaminante de la Roca: &fCuando estés en un bioma de montaña o cueva, obtienes &d+2 &fde Constitución, &c+1 &fde Fuerza, &5+2 &fde Sabiduría y &6+3 &fde Carisma."
+  dwarf-stats: "Estadísticas iniciales:\n&dConstitución: 4\n&cFuerza: 1\n&6Sabiduría: 2\n&6Carisma: 3."
+
+messages:
+  sql-error: "&cSQL error, please report to administrator."
+  no-perms: "&cNo tienes permisos para esto."
+  no-arguments: "&cEste comando necesita argumentos. Por favor, lea la documentación."
+  invalid-player: "&cJugador inválido"
+  sufficient-willpower: "&cNo tienes suficiente &dVoluntad"
+
+  abilities:
+    civilization-enter: "Has entrado en un bioma donde la civilización puede florecer..."
+    civilization-left: "Has dejado atrás las posibilidades de encontrar civilización..."
+    forest-enter: "Has entrado en un bosque..."
+    forest-left: "Has salido de un bosque..."
+    cave-or-cliffs-enter: "Has llegado a una cueva ¿o es una montaña?"
+    cave-or-cliffs-left: "Has dejado atrás tus tierras ancestrales..."
+    path-reaver-enter: "Al parecer, estás tierras ya han sido saqueadas..."
+    path-reaver-left: "Al parecer, no había nada interesante allí..."

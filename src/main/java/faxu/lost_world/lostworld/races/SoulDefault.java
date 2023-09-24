@@ -10,7 +10,7 @@ public class SoulDefault extends RaceData {
 
     public SoulDefault() {
         name = Races.SOUL.getName();
-        passiveAbility = Abilities.NONE.name();
+        passiveAbility = Abilities.NONE.getName();
         defaultStats = new HashMap<>();
         defaultStats.put(Stats.CONSTITUTION.name().toLowerCase(), 0);
         defaultStats.put(Stats.DEFENSE.name().toLowerCase(), 0);

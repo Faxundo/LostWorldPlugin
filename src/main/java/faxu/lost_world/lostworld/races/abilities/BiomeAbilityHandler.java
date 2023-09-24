@@ -15,10 +15,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BiomeAbilityHandler {
 
@@ -26,6 +23,10 @@ public class BiomeAbilityHandler {
     private final PlayerDataManager playerDataManager;
     private final RaceDataManager raceDataManager;
     private final FileConfiguration config;
+
+    //Add a cooldown to avoid multiple updates at a single time
+    private final Map<UUID, Long> cooldowns = new HashMap<>();
+    private final long cooldownTime = 3000;
 
     public BiomeAbilityHandler(LostWorld plugin) {
         this.plugin = plugin;
@@ -37,6 +38,13 @@ public class BiomeAbilityHandler {
     public void applyEffect(PlayerMoveEvent event, String race, String abilityName, Map<String, Integer> racialModifier, NamespacedKey nameKey, String enter, String left) {
         setRacialModifiers(abilityName, racialModifier);
         Player player = event.getPlayer();
+
+        if (cooldowns.containsKey(player.getUniqueId())) {
+            long secondsLeft = (cooldowns.get(player.getUniqueId()) + cooldownTime - System.currentTimeMillis()) / 1000;
+            if (secondsLeft > 0) {
+                return;
+            }
+        }
 
         //Verify gamemode of player and his race
         if (player.getGameMode().equals(GameMode.SURVIVAL) && raceDataManager.isRace(player, race)) {

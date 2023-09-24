@@ -3,7 +3,6 @@ package faxu.lost_world.lostworld.commands.subcommands;
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.commands.SubCommand;
 import faxu.lost_world.lostworld.menus.RaceMenu;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class RacesCommand extends SubCommand {
@@ -33,13 +32,10 @@ public class RacesCommand extends SubCommand {
 
     @Override
     public void perform(Player player, String[] args) {
-        if (args.length > 1) {
-            Player target = Bukkit.getPlayer(args[1]);
-            if (target != null && !hasPerm(plugin, player, "lostworld.races")) {
-                raceMenu.createMenu(target, player);
+        if (args.length == 1) {
+            if (hasPerm(plugin, player, "lostworld.races")) {
+                raceMenu.createMenu(player, player);
             }
-        } else if (args.length == 1) {
-            raceMenu.createMenu(player, player);
         }
     }
 }

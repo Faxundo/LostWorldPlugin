@@ -47,7 +47,7 @@ racial-abilities:
 
 
 names:
-#Stats
+  #Stats
   constitution: "&dConstitution"
   defense: "&bDefense"
   strength: "&cStrength"
@@ -58,23 +58,25 @@ names:
   charisma: "&6Charisma"
   willpower: "Willpower" #This no admit '&' symbol
 
-#Races
+  #Races
   race: "&eRace"
   human: "&6&lHuman"
   orc: "&6&lOrc"
   elf: "&6&lElf"
   dwarf: "&6&lDwarf"
 
-#Abilities
+  #Abilities
   ability: "&eAbility"
 
-#GUI
+  #GUI
   invstats: "Stats"
   invrace: "Races"
 
 descriptions:
-#Stats
-  constitution: "&eIncreases your health."
+  #Stats
+  constitution: "&eIncreases your health.
+  
+  &fEach point is one point of health"
   defense: "&eReduces the incoming damage."
   strength: "&eIncreases the melee damage."
   dexterity: "&eIncreases the range damage."
@@ -83,11 +85,19 @@ descriptions:
   luck: "&eUseful for fishing, some loot tables of chests and for obtain more loot at mine blocks."
   charisma: "&eCharisma"
 
-#Races
-  human: "&eChange you race to Human"
-  orc: "&eChange you race to Orc"
-  elf: "&eChange you race to Elf"
-  dwarf: "&eChange you race to Dwarf"
+  #Races
+  human-description: "&eChange you race to Human.\n&fA balanced race with a lot of luck."
+  human-ability: "&aCivilization Walker: &fWhen you are in biome where village can spawn, you obtain &6+1 &fthat all stats."
+  human-stats: "&eInitials stats:\n&fAll stats: &61\n&fLuck: &a3"
+  orc-description: "&eChange you race to Orc.\n&fA conflictive race focused on combat."
+  orc-ability: "&aPath of the Reaver: &fWhen you are in biome abandoned by life, you obtain &d+4 &fConstitution, &c+2 &fStrength and &b+2 &fDefense."
+  orc-stats: "&eInitials stats:\n&fConstitution: &d4\n&fDefense: &b2\n&fStrength: &c3\n&fIntelligence: &91"
+  elf-description: "&eChange you race to Elf.\n&fAn ancient race with a lot of knowledge to share."
+  elf-ability: "&aForest Dweller: &fWhen you are in a forest biome, you obtain &2+4 &fDexterity, &9+2 &fIntelligence and &5+2 &fWisdom"
+  elf-stats: "&eInitials stats:\n&fDexterity: &22\n&fIntelligence: &94\n&fWisdom: &54"
+  dwarf-description: "&eChange you race to Dwarf.\n&fA resilient and rather greedy race."
+  dwarf-ability: "&aCave and Cliffs Life: &fWhen you are in a biome of mountain or of cave, you obtain &d+2 &fConstitution, &c+1 &fStrength, &5+2 &fWisdom and &6+3 &fCharisma."
+  dwarf-stats: "&eInitials stats:\n&fConstitution: &d4\n&fStrength: &c1\n&fWisdom: &52\n&fCharisma: &63"
 
 messages:
   sql-error: "&cSQL error, please report to administrator."
@@ -98,7 +108,7 @@ messages:
 
   abilities:
     civilization-enter: "You have entered a biome where civilization may exist..."
-    civilization-left: "The possibilities of civilization have been left behind"
+    civilization-left: "The possibilities of civilization have been left behind.."
     forest-enter: "You entered a forest..."
     forest-left: "You came out of a forest..."
     cave-or-cliffs-enter: "Have you arrived at a cave... or a mountain?"

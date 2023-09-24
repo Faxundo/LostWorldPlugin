@@ -35,7 +35,7 @@ public class StatsCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if (args.length > 1) {
             Player target = Bukkit.getPlayer(args[1]);
-            if (target != null && !hasPerm(plugin, player, "lostworld.seestats")) {
+            if (target != null && hasPerm(plugin, player, "lostworld.seestats")) {
                 statsMenu.createMenu(target, player);
             }
         } else if (args.length == 1) {

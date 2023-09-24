@@ -10,7 +10,7 @@ public class DwarfRace extends RaceData {
 
     public DwarfRace() {
         name = Races.DWARF.getName();
-        passiveAbility = Abilities.CAVE_AND_CLIFFS_LIFE.name();
+        passiveAbility = Abilities.CAVE_AND_CLIFFS_LIFE.getName();
         defaultStats = new HashMap<>();
         defaultStats.put(Stats.CONSTITUTION.name().toLowerCase(), 4);
         defaultStats.put(Stats.DEFENSE.name().toLowerCase(), 0);

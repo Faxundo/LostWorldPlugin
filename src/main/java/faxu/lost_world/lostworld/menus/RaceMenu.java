@@ -24,15 +24,33 @@ public class RaceMenu extends MenuHandler {
 
         Inventory inv = Bukkit.createInventory(player, invSize, invName);
 
-        fillMenu(invSize, inv);
-        inv.setItem(10, getItem(new ItemStack(Material.DIAMOND),
-                config.getString("names.human"), config.getString("descriptions.human")));
-        inv.setItem(12, getItem(new ItemStack(Material.DIAMOND),
-                config.getString("names.orc"), config.getString("descriptions.orc")));
-        inv.setItem(14, getItem(new ItemStack(Material.DIAMOND),
-                config.getString("names.elf"), config.getString("descriptions.elf")));
-        inv.setItem(16, getItem(new ItemStack(Material.DIAMOND),
-                config.getString("names.dwarf"), config.getString("descriptions.dwarf")));
+        inv.setItem(10, getItem(new ItemStack(Material.DIAMOND), config.getString("names.human"),
+                config.getString("descriptions.human-description"),
+                " ",
+                config.getString("descriptions.human-ability"),
+                " ",
+                config.getString("descriptions.human-stats")));
+
+        inv.setItem(12, getItem(new ItemStack(Material.DIAMOND), config.getString("names.orc"),
+                config.getString("descriptions.orc-description"),
+                " ",
+                config.getString("descriptions.orc-ability"),
+                " ",
+                config.getString("descriptions.orc-stats")));
+
+        inv.setItem(14, getItem(new ItemStack(Material.DIAMOND), config.getString("names.elf"),
+                config.getString("descriptions.elf-description"),
+                " ",
+                config.getString("descriptions.elf-ability"),
+                " ",
+                config.getString("descriptions.elf-stats")));
+
+        inv.setItem(16, getItem(new ItemStack(Material.DIAMOND), config.getString("names.dwarf"),
+                config.getString("descriptions.dwarf-description"),
+                " ",
+                config.getString("descriptions.dwarf-ability"),
+                " ",
+                config.getString("descriptions.dwarf-stats")));
 
         if (sender instanceof Player) {
             Player senderPlayer = (Player) sender;

@@ -33,8 +33,9 @@ public class UpdateCommand extends SubCommand {
     public void perform(Player player, String[] args) {
         if (args.length > 1) {
             Player target = Bukkit.getPlayer(args[1]);
-            if (target != null && !hasPerm(plugin, player, "lostworld.updatestats")) {
+            if (target != null && hasPerm(plugin, player, "lostworld.updatestats")) {
                 plugin.getPlayerDataManager().updateStat(player, args[2], args[3], Integer.parseInt(args[4]));
+                player.sendMessage(ChatColor.GREEN + "Was " + args[3].toUpperCase() + " to " + args[2] + " stat, of the player " + player.getName() + " in " + args[4] + " levels");
             }
         } else if (args.length == 1) {
             player.sendMessage(ChatColor.RED + "You need provide a player name.");

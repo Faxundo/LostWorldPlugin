@@ -3,6 +3,7 @@ package faxu.lost_world.lostworld.data;
 import com.j256.ormlite.dao.Dao;
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.data.races.RaceData;
+import faxu.lost_world.lostworld.races.Races;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;
@@ -36,6 +37,7 @@ public class PlayerDataManager {
     public void addPlayer(Player player) {
         PlayerData playerData = new PlayerData();
         playerData.setUuid(player.getUniqueId().toString());
+        playerData.setRace(plugin.getRaceDataManager().getRaceByName(Races.SOUL.getName()));
         try {
             playerDataDao.create(playerData);
         } catch (SQLException ex) {
@@ -95,12 +97,15 @@ public class PlayerDataManager {
     public void setRace(Player player, RaceData race) {
         PlayerData playerData = getPlayerData(player);
         HashMap<String, Integer> raceStats = race.getDefaultStats();
-        playerData.setRace(race);
-        for (Map.Entry<String, Integer> entry : raceStats.entrySet()) {
-            String key = entry.getKey();
-            Integer value = entry.getValue();
 
-            playerData.setStat(key, value);
+        if (raceStats != null) {
+            playerData.setRace(race);
+            for (Map.Entry<String, Integer> entry : raceStats.entrySet()) {
+                String key = entry.getKey();
+                Integer value = entry.getValue();
+
+                playerData.setStat(key, value);
+            }
         }
         try {
             playerDataDao.update(playerData);

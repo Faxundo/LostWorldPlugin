@@ -26,9 +26,6 @@ public class StatsMenu extends MenuHandler {
 
         Inventory inv = Bukkit.createInventory(player, invSize, invName);
 
-        fillMenu(invSize, inv);
-
-
         inv.setItem(22, getHead(player));
         inv.setItem(10, getItem(new ItemStack(Material.PINK_STAINED_GLASS),
                 config.getString("names.constitution"), config.getString("descriptions.constitution")));
