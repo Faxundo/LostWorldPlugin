@@ -2,7 +2,7 @@ package faxu.lost_world.lostworld.events;
 
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.stats.Defense;
-import faxu.lost_world.lostworld.stats.Dextery;
+import faxu.lost_world.lostworld.stats.Dexterity;
 import faxu.lost_world.lostworld.stats.Strength;
 import faxu.lost_world.lostworld.util.DamageType;
 import org.bukkit.Material;
@@ -20,13 +20,13 @@ public class PlayerDamageListener implements Listener {
     private final LostWorld plugin;
     private final Strength strength;
     private final Defense defense;
-    private final Dextery dextery;
+    private final Dexterity dexterity;
 
     public PlayerDamageListener(LostWorld plugin) {
         this.plugin = plugin;
         strength = new Strength();
         defense = new Defense();
-        dextery = new Dextery();
+        dexterity = new Dexterity();
     }
 
     @EventHandler
@@ -39,43 +39,44 @@ public class PlayerDamageListener implements Listener {
         }
 
         //Apply Strength
-        Player attacker = getDamager(event.getDamager());
+        if (event.getDamager() instanceof Player) {
+            Player attacker = getDamager(event.getDamager());
 
-        if (attacker != null) {
-            DamageType damageType = getDamageType(attacker);
+            if (attacker != null) {
+                DamageType damageType = getDamageType(attacker);
 
-            ArrayList<DamageType> melee = new ArrayList<>();
-            melee.add(DamageType.SWORD);
-            melee.add(DamageType.AXE);
-            melee.add(DamageType.HOE);
-            melee.add(DamageType.PICKAXE);
-            melee.add(DamageType.HAND);
-            melee.add(DamageType.SHOVEL);
+                ArrayList<DamageType> melee = new ArrayList<>();
+                melee.add(DamageType.SWORD);
+                melee.add(DamageType.AXE);
+                melee.add(DamageType.HOE);
+                melee.add(DamageType.PICKAXE);
+                melee.add(DamageType.HAND);
+                melee.add(DamageType.SHOVEL);
 
-            for (int i = 0; i < melee.size(); i++) {
-                if (melee.contains(damageType)) {
-                    strength.applyStrength(plugin, event);
+                for (int i = 0; i < melee.size(); i++) {
+                    if (melee.contains(damageType)) {
+                        strength.applyStrength(plugin, event);
+                    }
+                }
+
+                //Apply Dexterity
+                ArrayList<DamageType> range = new ArrayList<>();
+                range.add(DamageType.BOW);
+                range.add(DamageType.CROSSBOW);
+                range.add(DamageType.TRIDENT);
+                if (plugin.getConfig().getBoolean("stats.dexterity-affects-egg")) {
+                    range.add(DamageType.EGG);
+                }
+                if (plugin.getConfig().getBoolean("stats.dexterity-affects-snowball")) {
+                    range.add(DamageType.SNOWBALL);
+                }
+
+                for (int i = 0; i < range.size(); i++) {
+                    if (range.contains(damageType)) {
+                        dexterity.applyDexterity(plugin, event, attacker);
+                    }
                 }
             }
-
-            //Apply Dextery
-            ArrayList<DamageType> range = new ArrayList<>();
-            range.add(DamageType.BOW);
-            range.add(DamageType.CROSSBOW);
-            range.add(DamageType.TRIDENT);
-            if (plugin.getConfig().getBoolean("stats.dextery-affects-egg")) {
-                range.add(DamageType.EGG);
-            }
-            if (plugin.getConfig().getBoolean("stats.dextery-affects-snowball")) {
-                range.add(DamageType.SNOWBALL);
-            }
-
-            for (int i = 0; i < range.size(); i++) {
-                if (range.contains(damageType)) {
-                    dextery.applyDextery(plugin, event, attacker);
-                }
-            }
-
         }
     }
 

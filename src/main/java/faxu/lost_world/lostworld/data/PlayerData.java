@@ -19,7 +19,7 @@ public class PlayerData {
     @DatabaseField(canBeNull = false, defaultValue = "0")
     private int strength;
     @DatabaseField(canBeNull = false, defaultValue = "0")
-    private int dextery;
+    private int dexterity;
     @DatabaseField(canBeNull = false, defaultValue = "0")
     private int intelligence;
     @DatabaseField(canBeNull = false, defaultValue = "0")
@@ -31,7 +31,10 @@ public class PlayerData {
     @DatabaseField(foreign = true, foreignColumnName = "id", foreignAutoRefresh = true)
     private RaceData race;
 
+    private HashMap<String, Integer> statsModifiers;
+
     public PlayerData() {
+        statsModifiers = new HashMap<>();
     }
 
     public String getUuid() {
@@ -66,12 +69,12 @@ public class PlayerData {
         this.strength = strength;
     }
 
-    public int getDextery() {
-        return dextery;
+    public int getDexterity() {
+        return dexterity;
     }
 
-    public void setDextery(int dextery) {
-        this.dextery = dextery;
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
     }
 
     public int getIntelligence() {
@@ -114,12 +117,20 @@ public class PlayerData {
         this.race = race;
     }
 
+    public HashMap<String, Integer> getstatsModifiers () {
+        return statsModifiers;
+    }
+
+    public void setStatsModifiers (HashMap<String, Integer> statsModifiers) {
+        this.statsModifiers = statsModifiers;
+    }
+
     public HashMap<String, Integer> getStats() {
         HashMap<String, Integer> stats = new HashMap<>();
         stats.put(Stats.CONSTITUTION.name().toLowerCase(), this.constitution);
         stats.put(Stats.DEFENSE.name().toLowerCase(), this.defense);
         stats.put(Stats.STRENGTH.name().toLowerCase(), this.strength);
-        stats.put(Stats.DEXTERY.name().toLowerCase(), this.dextery);
+        stats.put(Stats.DEXTERITY.name().toLowerCase(), this.dexterity);
         stats.put(Stats.INTELLIGENCE.name().toLowerCase(), this.intelligence);
         stats.put(Stats.WISDOM.name().toLowerCase(), this.wisdom);
         stats.put(Stats.LUCK.name().toLowerCase(), this.luck);
@@ -135,8 +146,8 @@ public class PlayerData {
                 return this.defense;
             case "strength":
                 return this.strength;
-            case "dextery":
-                return this.dextery;
+            case "dexterity":
+                return this.dexterity;
             case "intelligence":
                 return this.intelligence;
             case "wisdom":
@@ -161,8 +172,8 @@ public class PlayerData {
             case "strength":
                 this.strength = amount;
                 break;
-            case "dextery":
-                this.dextery = amount;
+            case "dexterity":
+                this.dexterity = amount;
                 break;
             case "intelligence":
                 this.intelligence = amount;

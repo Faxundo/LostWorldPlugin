@@ -6,7 +6,7 @@
 
     <groupId>faxu.lost_world</groupId>
     <artifactId>LostWorld</artifactId>
-    <version>Alpha.0.0.3</version>
+    <version>0.2.2</version>
     <packaging>jar</packaging>
 
     <name>LostWorld</name>
