@@ -3,12 +3,14 @@ package faxu.lost_world.lostworld.willpower;
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.data.PlayerData;
 import faxu.lost_world.lostworld.util.ActionBar;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class Willpower {
     private final LostWorld plugin;
@@ -53,9 +55,20 @@ public class Willpower {
         }
     }
 
-    public void willPowerBar(Player player) {
-        int willPowerAmount = getWillPower(player);
-        int willPowerMax = getMaxWillPower(player);
-        ActionBar.sendActionBar(player, ChatColor.LIGHT_PURPLE + config.getString("names.willpower") + ": " + willPowerAmount + "/" + willPowerMax);
+    public void willPowerBar() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (player.isOnline()) {
+                        int willPowerAmount = getWillPower(player);
+                        int willPowerMax = getMaxWillPower(player);
+                        ActionBar.sendActionBar(player, ChatColor.translateAlternateColorCodes('&',
+                                config.getString("names.willpower") + ": " + willPowerAmount + "/" + willPowerMax));
+
+                    }
+                }
+            }
+        }.runTaskTimerAsynchronously(plugin, 40L, 40L);
     }
 }

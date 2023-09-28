@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerJoinListener implements Listener {
 
@@ -23,8 +22,8 @@ public class PlayerJoinListener implements Listener {
         this.plugin = plugin;
         playerDataManager = plugin.getPlayerDataManager();
         constitution = new Constitution();
-        luck = new Luck();
-        willpower = new Willpower(plugin);
+        luck = new Luck(this.plugin);
+        willpower = new Willpower(this.plugin);
     }
 
     @EventHandler
@@ -34,21 +33,9 @@ public class PlayerJoinListener implements Listener {
         if (!playerDataManager.playerExists(player)) {
             playerDataManager.addPlayer(player);
         }
-
         constitution.applyConstitution(plugin, player);
         luck.applyLuck(plugin, player);
         willpower.setWillPower(player, 0, true);
-
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                if (!player.isOnline()) {
-                    this.cancel();
-                }
-                willpower.willPowerBar(player);
-            }
-        }.runTaskTimerAsynchronously(plugin, 40L, 40L);
     }
 
 }

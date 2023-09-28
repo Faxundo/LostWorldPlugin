@@ -1,10 +1,39 @@
 # Plugin made by Faxu
 
+names:
+  #Stats
+  constitution: "&dConstitution"
+  defense: "&bDefense"
+  strength: "&cStrength"
+  dexterity: "&2Dexterity"
+  intelligence: "&9Intelligence"
+  wisdom: "&5Wisdom"
+  luck: "&aLuck"
+  charisma: "&6Charisma"
+  willpower: "&3Willpower"
+
+  #Races
+  race: "&eRace"
+  race-level: "&eRace Level"
+  human: "&6&lHuman"
+  orc: "&6&lOrc"
+  elf: "&6&lElf"
+  dwarf: "&6&lDwarf"
+
+  #Abilities
+  ability: "&eAbility"
+
+  #GUI
+  inv-profile: "&6Profile"
+  inv-leveling-race: "&6Race Profile"
+  inv-race-selection: "&6Race Selection"
+  inv-confirm: "&aAre you sure?"
+
+
 stats:
-  # Remember 2 points of life = 1 Heart
   # Vanilla Default = 20
-  default-constitution: 20
-  dexterity-affects-snowball: false
+  default-constitution: 20   # Remember 2 points of life = 1 Heart
+  dexterity-affects-snowball: true
   dexterity-affects-egg: true
 
 racial-abilities:
@@ -45,32 +74,10 @@ racial-abilities:
     luck: 0
     charisma: 0
 
-
-names:
-  #Stats
-  constitution: "&dConstitution"
-  defense: "&bDefense"
-  strength: "&cStrength"
-  dexterity: "&2Dexterity"
-  intelligence: "&9Intelligence"
-  wisdom: "&5Wisdom"
-  luck: "&aLuck"
-  charisma: "&6Charisma"
-  willpower: "Willpower" #This no admit '&' symbol
-
-  #Races
-  race: "&eRace"
-  human: "&6&lHuman"
-  orc: "&6&lOrc"
-  elf: "&6&lElf"
-  dwarf: "&6&lDwarf"
-
-  #Abilities
-  ability: "&eAbility"
-
-  #GUI
-  invstats: "Stats"
-  invrace: "Races"
+leveling:
+  max-level: 10
+  multiplier-base: 50
+  multiplier-level: 25 #This amount will be multiplied by the number of current levels
 
 descriptions:
   #Stats
@@ -86,7 +93,7 @@ descriptions:
   charisma: "&eCharisma"
 
   #Races
-  human-description: "&eChange you race to Human.\n&fA balanced race with a lot of luck."
+  human-description: "&eChange you race to Human.\n&fA balanced race with a lot of luck.\n"
   human-ability: "&aCivilization Walker: &fWhen you are in biome where village can spawn, you obtain &6+1 &fthat all stats."
   human-stats: "&eInitials stats:\n&fAll stats: &61\n&fLuck: &a3"
   orc-description: "&eChange you race to Orc.\n&fA conflictive race focused on combat."
@@ -105,6 +112,8 @@ messages:
   no-arguments: "&cThis command need arguments. Please read the documentation."
   invalid-player: "&cInvalid player."
   sufficient-willpower: "&cYou don't have sufficient willpower."
+  choose-new-race: "&6You choose a new race."
+  already-have-race: "&eYou already have this race. Choose another!"
 
   abilities:
     civilization-enter: "You have entered a biome where civilization may exist..."

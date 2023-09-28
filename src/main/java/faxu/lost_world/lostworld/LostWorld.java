@@ -5,16 +5,22 @@ import faxu.lost_world.lostworld.data.Database;
 import faxu.lost_world.lostworld.data.PlayerDataManager;
 import faxu.lost_world.lostworld.data.races.RaceDataManager;
 import faxu.lost_world.lostworld.events.*;
+import faxu.lost_world.lostworld.menusystem.PlayerMenuUtility;
 import faxu.lost_world.lostworld.races.abilities.CaveAndCliffsLife;
 import faxu.lost_world.lostworld.races.abilities.CivilizationWalker;
 import faxu.lost_world.lostworld.races.abilities.ForestDweller;
 import faxu.lost_world.lostworld.races.abilities.PathOfTheReaver;
+import faxu.lost_world.lostworld.stats.Luck;
+import faxu.lost_world.lostworld.stats.Wisdom;
 import faxu.lost_world.lostworld.util.DelayedTask;
+import faxu.lost_world.lostworld.willpower.Willpower;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public final class LostWorld extends JavaPlugin {
 
@@ -22,6 +28,8 @@ public final class LostWorld extends JavaPlugin {
     private Database database;
     private PlayerDataManager playerDataManager;
     private RaceDataManager raceDataManager;
+    private static final HashMap<Player, PlayerMenuUtility> playerMenuUtilityMap = new HashMap<>();
+    private final Willpower willpower = new Willpower(this);
 
     @Override
     public void onEnable() {
@@ -48,11 +56,12 @@ public final class LostWorld extends JavaPlugin {
 
 
         //Events
+        plugin.registerEvents(new MenuListener(), this);
         plugin.registerEvents(new PlayerJoinListener(this), this);
         plugin.registerEvents(new PlayerDamageListener(this), this);
-        plugin.registerEvents(new ExpListener(this), this);
-        plugin.registerEvents(new InventoryClickListener(this), this);
-        plugin.registerEvents(new BlockBreakListener(this), this);
+        plugin.registerEvents(new Wisdom(this), this);
+        plugin.registerEvents(new Luck(this), this);
+        willpower.willPowerBar();
 
         //Commands
         getCommand("lostworld").setExecutor(new CommandManager(this));
@@ -78,12 +87,26 @@ public final class LostWorld extends JavaPlugin {
         return this.database;
     }
 
-    public PlayerDataManager getPlayerDataManager () {
+    public PlayerDataManager getPlayerDataManager() {
         return this.playerDataManager;
     }
 
-    public RaceDataManager getRaceDataManager () {
+    public RaceDataManager getRaceDataManager() {
         return this.raceDataManager;
+    }
+
+    // Each player only can have one menu at same time
+    public static PlayerMenuUtility getPlayerMenuUtility(Player player) {
+        PlayerMenuUtility playerMenuUtility;
+
+        if (playerMenuUtilityMap.containsKey(player)) {
+            return playerMenuUtilityMap.get(player);
+        } else {
+            playerMenuUtility = new PlayerMenuUtility(player);
+            playerMenuUtilityMap.put(player, playerMenuUtility);
+
+            return playerMenuUtility;
+        }
     }
 
 }

@@ -30,8 +30,10 @@ public class PlayerData {
     private int charisma;
     @DatabaseField(foreign = true, foreignColumnName = "id", foreignAutoRefresh = true)
     private RaceData race;
-
+    @DatabaseField(canBeNull = false, defaultValue = "1")
+    private int raceLevel;
     private HashMap<String, Integer> statsModifiers;
+
 
     public PlayerData() {
         statsModifiers = new HashMap<>();
@@ -123,6 +125,14 @@ public class PlayerData {
 
     public void setStatsModifiers (HashMap<String, Integer> statsModifiers) {
         this.statsModifiers = statsModifiers;
+    }
+
+    public int getRaceLevel () {
+        return raceLevel;
+    }
+
+    public void setRaceLevel (int raceLevel) {
+        this.raceLevel = raceLevel;
     }
 
     public HashMap<String, Integer> getStats() {

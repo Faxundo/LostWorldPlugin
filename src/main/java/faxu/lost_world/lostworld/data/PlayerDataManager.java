@@ -31,13 +31,14 @@ public class PlayerDataManager {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-        return null;
+        return new PlayerData();
     }
 
     public void addPlayer(Player player) {
         PlayerData playerData = new PlayerData();
         playerData.setUuid(player.getUniqueId().toString());
         playerData.setRace(plugin.getRaceDataManager().getRaceByName(Races.SOUL.getName()));
+        playerData.setRaceLevel(1);
         try {
             playerDataDao.create(playerData);
         } catch (SQLException ex) {
@@ -96,9 +97,8 @@ public class PlayerDataManager {
     //Restart all stats of Player, because set default stats of race
     public void setRace(Player player, RaceData race) {
         PlayerData playerData = getPlayerData(player);
-        HashMap<String, Integer> raceStats = race.getDefaultStats();
-
-        if (raceStats != null) {
+        if (race != null) {
+            HashMap<String, Integer> raceStats = race.getDefaultStats();
             playerData.setRace(race);
             for (Map.Entry<String, Integer> entry : raceStats.entrySet()) {
                 String key = entry.getKey();
@@ -106,11 +106,23 @@ public class PlayerDataManager {
 
                 playerData.setStat(key, value);
             }
+            try {
+                playerDataDao.update(playerData);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
-        try {
-            playerDataDao.update(playerData);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    }
+
+    public void setRaceLevel(Player player, int amount) {
+        PlayerData playerData = getPlayerData(player);
+        if (amount > 0) {
+            playerData.setRaceLevel(amount);
+            try {
+                playerDataDao.update(playerData);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

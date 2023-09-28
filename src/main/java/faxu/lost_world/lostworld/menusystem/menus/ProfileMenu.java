@@ -1,53 +1,77 @@
-package faxu.lost_world.lostworld.menus;
+package faxu.lost_world.lostworld.menusystem.menus;
 
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.data.PlayerData;
-import org.bukkit.Bukkit;
+import faxu.lost_world.lostworld.data.PlayerDataManager;
+import faxu.lost_world.lostworld.leveling.RaceLeveling;
+import faxu.lost_world.lostworld.menusystem.Menu;
+import faxu.lost_world.lostworld.menusystem.PlayerMenuUtility;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-public class StatsMenu extends MenuHandler {
+public class ProfileMenu extends Menu {
 
     private final LostWorld plugin;
     private final FileConfiguration config;
+    private final PlayerDataManager playerDataManager;
+    private final RaceLeveling raceLeveling;
 
-    public StatsMenu(LostWorld plugin) {
-        super(plugin.getConfig().getString("names.invstats"), 9 * 5);
+    public ProfileMenu(LostWorld plugin, PlayerMenuUtility playerMenuUtility) {
+        super(playerMenuUtility);
         this.plugin = plugin;
         config = plugin.getConfig();
+        playerDataManager = plugin.getPlayerDataManager();
+        raceLeveling = new RaceLeveling(this.plugin);
     }
 
-    public void createMenu(Player player, CommandSender sender) {
+    @Override
+    public String getMenuName() {
+        return ChatColor.translateAlternateColorCodes('&', config.getString("names.inv-profile"));
+    }
 
-        Inventory inv = Bukkit.createInventory(player, invSize, invName);
+    @Override
+    public int getSlots() {
+        return 9 * 6;
+    }
 
-        inv.setItem(22, getHead(player));
-        inv.setItem(10, getItem(new ItemStack(Material.PINK_STAINED_GLASS),
+    @Override
+    public void handleMenu(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+
+        int slot = event.getSlot();
+        if (slot == 25) {
+            raceLeveling.updateLevel(player);
+        }
+    }
+
+    @Override
+    public void setMenuItems() {
+        inventory.setItem(22, getHead(playerMenuUtility.getOwner()));
+
+        inventory.setItem(10, getItem(new ItemStack(Material.PINK_STAINED_GLASS_PANE),
                 config.getString("names.constitution"), config.getString("descriptions.constitution")));
-        inv.setItem(12, getItem(new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS),
+        inventory.setItem(11, getItem(new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE),
                 config.getString("names.defense"), config.getString("descriptions.defense")));
-        inv.setItem(14, getItem(new ItemStack(Material.RED_STAINED_GLASS),
+        inventory.setItem(19, getItem(new ItemStack(Material.RED_STAINED_GLASS_PANE),
                 config.getString("names.strength"), config.getString("descriptions.strength")));
-        inv.setItem(16, getItem(new ItemStack(Material.GREEN_STAINED_GLASS),
+        inventory.setItem(20, getItem(new ItemStack(Material.GREEN_STAINED_GLASS_PANE),
                 config.getString("names.dexterity"), config.getString("descriptions.dexterity")));
-        inv.setItem(28, getItem(new ItemStack(Material.BLUE_STAINED_GLASS),
+        inventory.setItem(28, getItem(new ItemStack(Material.BLUE_STAINED_GLASS_PANE),
                 config.getString("names.intelligence"), config.getString("descriptions.intelligence")));
-        inv.setItem(30, getItem(new ItemStack(Material.PURPLE_STAINED_GLASS),
+        inventory.setItem(29, getItem(new ItemStack(Material.PURPLE_STAINED_GLASS_PANE),
                 config.getString("names.wisdom"), config.getString("descriptions.wisdom")));
-        inv.setItem(32, getItem(new ItemStack(Material.LIME_STAINED_GLASS),
+        inventory.setItem(37, getItem(new ItemStack(Material.LIME_STAINED_GLASS_PANE),
                 config.getString("names.luck"), config.getString("descriptions.luck")));
-        inv.setItem(34, getItem(new ItemStack(Material.ORANGE_STAINED_GLASS),
+        inventory.setItem(38, getItem(new ItemStack(Material.ORANGE_STAINED_GLASS_PANE),
                 config.getString("names.charisma"), config.getString("descriptions.charisma")));
 
-        if (sender instanceof Player) {
-            Player senderPlayer = (Player) sender;
-            senderPlayer.openInventory(inv);
-        }
+        inventory.setItem(24, getRaceIcon(playerMenuUtility.getOwner()));
+        inventory.setItem(25, getItem(new ItemStack(Material.REDSTONE), "Level Up"));
 
     }
 
@@ -58,6 +82,7 @@ public class StatsMenu extends MenuHandler {
         getItem(item, "&6&l" + player.getName(), " ",
                 config.getString("names.race") + ": " + playerData.getRace().getName(),
                 config.get("names.ability") + ": " + playerData.getRace().getPassiveAbility(),
+                config.get("names.race-level") + ": " + playerData.getRaceLevel(),
                 " ",
                 config.get("names.constitution") + ": " + playerData.getConstitution(),
                 config.get("names.defense") + ": " + playerData.getDefense(),
@@ -73,6 +98,12 @@ public class StatsMenu extends MenuHandler {
         meta.setOwningPlayer(player);
 
         item.setItemMeta(meta);
+        return item;
+    }
+
+    public ItemStack getRaceIcon(Player player) {
+        PlayerData playerData = plugin.getPlayerDataManager().getPlayerData(player);
+        ItemStack item = new ItemStack(Material.DIAMOND, 1);
         return item;
     }
 }

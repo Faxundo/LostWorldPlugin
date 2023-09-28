@@ -1,4 +1,4 @@
-![Cover image](src/main/resources/images/Plugin Portada.png)
+![Cover image](src/main/resources/images/plugin_portada.png)
 
 A plugin of Races, stats, classes and abilities for Minecraft 1.20.1.
 The foundations of plugin is a stats. 

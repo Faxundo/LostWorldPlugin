@@ -1,8 +1,11 @@
-package faxu.lost_world.lostworld.menus;
+package faxu.lost_world.lostworld.menusystem;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -10,14 +13,34 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MenuHandler {
+public abstract class Menu implements InventoryHolder {
 
-    protected final String invName;
-    protected final int invSize;
+    protected Inventory inventory;
+    protected PlayerMenuUtility playerMenuUtility;
 
-    public MenuHandler(String invName, int invSize) {
-        this.invName = invName;
-        this.invSize = invSize;
+    public Menu(PlayerMenuUtility playerMenuUtility) {
+        this.playerMenuUtility = playerMenuUtility;
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public abstract String getMenuName();
+
+    public abstract int getSlots();
+
+    public abstract void handleMenu(InventoryClickEvent event);
+
+    public abstract void setMenuItems();
+
+    public void openMenu() {
+        inventory = Bukkit.createInventory(this, getSlots(), getMenuName());
+
+        this.setMenuItems();
+
+        playerMenuUtility.getOwner().openInventory(inventory);
     }
 
     public ItemStack getItem(ItemStack item, String name, String... lore) {
@@ -38,7 +61,7 @@ public class MenuHandler {
         return item;
     }
 
-    public void fillMenu (int invSize, Inventory inv) {
+    public void fillMenu(int invSize, Inventory inv) {
         ItemStack blank = new ItemStack(Material.BLACK_STAINED_GLASS_PANE);
         for (int i = 0; i < invSize; i++) {
             ItemMeta meta = blank.getItemMeta();
