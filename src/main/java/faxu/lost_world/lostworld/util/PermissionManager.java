@@ -6,13 +6,7 @@ import org.bukkit.permissions.PermissionAttachment;
 
 public class PermissionManager {
 
-    private final LostWorld plugin;
-
-    public PermissionManager(LostWorld plugin) {
-        this.plugin = plugin;
-    }
-
-    public void addPermission(Player player, String permName) {
+    public static void addPermission(LostWorld plugin, Player player, String permName) {
         PermissionAttachment attachment = player.addAttachment(plugin);
 
         attachment.setPermission(permName, true);
@@ -20,7 +14,7 @@ public class PermissionManager {
         player.removeAttachment(attachment);
     }
 
-    public void removePermission(Player player, String permName) {
+    public static void removePermission(LostWorld plugin, Player player, String permName) {
         PermissionAttachment attachment = player.addAttachment(plugin);
 
         attachment.unsetPermission(permName);

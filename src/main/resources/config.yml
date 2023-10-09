@@ -1,40 +1,15 @@
 # Plugin made by Faxu
 
-names:
-  #Stats
-  constitution: "&dConstitution"
-  defense: "&bDefense"
-  strength: "&cStrength"
-  dexterity: "&2Dexterity"
-  intelligence: "&9Intelligence"
-  wisdom: "&5Wisdom"
-  luck: "&aLuck"
-  charisma: "&6Charisma"
-  willpower: "&3Willpower"
-
-  #Races
-  race: "&eRace"
-  race-level: "&eRace Level"
-  human: "&6&lHuman"
-  orc: "&6&lOrc"
-  elf: "&6&lElf"
-  dwarf: "&6&lDwarf"
-
-  #Abilities
-  ability: "&eAbility"
-
-  #GUI
-  inv-profile: "&6Profile"
-  inv-leveling-race: "&6Race Profile"
-  inv-race-selection: "&6Race Selection"
-  inv-confirm: "&aAre you sure?"
-
-
 stats:
   # Vanilla Default = 20
   default-constitution: 20   # Remember 2 points of life = 1 Heart
   dexterity-affects-snowball: true
   dexterity-affects-egg: true
+
+leveling:
+  max-level: 10
+  multiplier-base: 50 #Base level needed for increase level race
+  multiplier-level: 25 #This amount will be multiplied by the number of current levels
 
 racial-abilities:
   civilization-walker:
@@ -74,38 +49,6 @@ racial-abilities:
     luck: 0
     charisma: 0
 
-leveling:
-  max-level: 10
-  multiplier-base: 50
-  multiplier-level: 25 #This amount will be multiplied by the number of current levels
-
-descriptions:
-  #Stats
-  constitution: "&eIncreases your health.
-  
-  &fEach point is one point of health"
-  defense: "&eReduces the incoming damage."
-  strength: "&eIncreases the melee damage."
-  dexterity: "&eIncreases the range damage."
-  intelligence: "&eDefine your willpower"
-  wisdom: "&eIncreases the experience obtained."
-  luck: "&eUseful for fishing, some loot tables of chests and for obtain more loot at mine blocks."
-  charisma: "&eCharisma"
-
-  #Races
-  human-description: "&eChange you race to Human.\n&fA balanced race with a lot of luck.\n"
-  human-ability: "&aCivilization Walker: &fWhen you are in biome where village can spawn, you obtain &6+1 &fthat all stats."
-  human-stats: "&eInitials stats:\n&fAll stats: &61\n&fLuck: &a3"
-  orc-description: "&eChange you race to Orc.\n&fA conflictive race focused on combat."
-  orc-ability: "&aPath of the Reaver: &fWhen you are in biome abandoned by life, you obtain &d+4 &fConstitution, &c+2 &fStrength and &b+2 &fDefense."
-  orc-stats: "&eInitials stats:\n&fConstitution: &d4\n&fDefense: &b2\n&fStrength: &c3\n&fIntelligence: &91"
-  elf-description: "&eChange you race to Elf.\n&fAn ancient race with a lot of knowledge to share."
-  elf-ability: "&aForest Dweller: &fWhen you are in a forest biome, you obtain &2+4 &fDexterity, &9+2 &fIntelligence and &5+2 &fWisdom"
-  elf-stats: "&eInitials stats:\n&fDexterity: &22\n&fIntelligence: &94\n&fWisdom: &54"
-  dwarf-description: "&eChange you race to Dwarf.\n&fA resilient and rather greedy race."
-  dwarf-ability: "&aCave and Cliffs Life: &fWhen you are in a biome of mountain or of cave, you obtain &d+2 &fConstitution, &c+1 &fStrength, &5+2 &fWisdom and &6+3 &fCharisma."
-  dwarf-stats: "&eInitials stats:\n&fConstitution: &d4\n&fStrength: &c1\n&fWisdom: &52\n&fCharisma: &63"
-
 messages:
   sql-error: "&cSQL error, please report to administrator."
   no-perms: "&cYou don't have permissions for this."
@@ -114,13 +57,22 @@ messages:
   sufficient-willpower: "&cYou don't have sufficient willpower."
   choose-new-race: "&6You choose a new race."
   already-have-race: "&eYou already have this race. Choose another!"
+  no-have-level: "&cYou don't have sufficient levels"
+  level-up: "&aLevel Up!"
+  no-have-points: "&cYou don't have Stats Points for use"
+  need-race: "&6You are a simple Soul. First choose one race."
+
+  commands:
+    need-player: "&cYou need provide a player name."
+    need-stat: "&cYou need provide a name of stat."
+    need-number: "You need provide a number."
 
   abilities:
-    civilization-enter: "You have entered a biome where civilization may exist..."
-    civilization-left: "The possibilities of civilization have been left behind.."
-    forest-enter: "You entered a forest..."
-    forest-left: "You came out of a forest..."
-    cave-or-cliffs-enter: "Have you arrived at a cave... or a mountain?"
-    cave-or-cliffs-left: "You have left your ancestral lands behind..."
-    path-reaver-enter: "Have these lands already been looted?"
-    path-reaver-left: "Apparently... there was nothing interesting there"
+    civilization-enter: "&aYou have entered a biome where civilization may exists..."
+    civilization-left: "&eThe possibilities of civilization have been left behind.."
+    forest-enter: "&aYou entered a forest..."
+    forest-left: "&eYou came out of a forest..."
+    cave-or-cliffs-enter: "&aHave you arrived at a cave... or a mountain?"
+    cave-or-cliffs-left: "&eYou have left your ancestral lands behind..."
+    path-reaver-enter: "&aHave these lands already been looted?"
+    path-reaver-left: "&eApparently... there was nothing interesting there"

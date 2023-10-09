@@ -1,9 +1,10 @@
 package faxu.lost_world.lostworld.data;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import faxu.lost_world.lostworld.data.races.RaceData;
-import faxu.lost_world.lostworld.stats.Stats;
+import faxu.lost_world.lostworld.data.race.RaceData;
+import faxu.lost_world.lostworld.stat.Stats;
 
 import java.util.HashMap;
 
@@ -31,12 +32,20 @@ public class PlayerData {
     @DatabaseField(foreign = true, foreignColumnName = "id", foreignAutoRefresh = true)
     private RaceData race;
     @DatabaseField(canBeNull = false, defaultValue = "1")
-    private int raceLevel;
+    private int race_level;
+    @DatabaseField(canBeNull = false, defaultValue = "0")
+    private int stat_points;
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private HashMap<String, Integer> racial_abilities;
+
+
+
     private HashMap<String, Integer> statsModifiers;
 
 
     public PlayerData() {
         statsModifiers = new HashMap<>();
+        racial_abilities = new HashMap<>();
     }
 
     public String getUuid() {
@@ -119,20 +128,36 @@ public class PlayerData {
         this.race = race;
     }
 
-    public HashMap<String, Integer> getstatsModifiers () {
+    public HashMap<String, Integer> getStatsModifiers() {
         return statsModifiers;
     }
 
-    public void setStatsModifiers (HashMap<String, Integer> statsModifiers) {
+    public void setStatsModifiers(HashMap<String, Integer> statsModifiers) {
         this.statsModifiers = statsModifiers;
     }
 
-    public int getRaceLevel () {
-        return raceLevel;
+    public int getRaceLevel() {
+        return race_level;
     }
 
-    public void setRaceLevel (int raceLevel) {
-        this.raceLevel = raceLevel;
+    public void setRaceLevel(int race_level) {
+        this.race_level = race_level;
+    }
+
+    public int getStatPoints() {
+        return stat_points;
+    }
+
+    public void setStatPoints(int stat_points) {
+        this.stat_points = stat_points;
+    }
+
+    public HashMap<String, Integer> getRacialAbilities() {
+        return racial_abilities;
+    }
+
+    public void setRacialAbilities(HashMap<String, Integer> racial_abilities) {
+        this.racial_abilities = racial_abilities;
     }
 
     public HashMap<String, Integer> getStats() {

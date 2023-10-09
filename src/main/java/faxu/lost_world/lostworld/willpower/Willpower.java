@@ -1,10 +1,11 @@
 package faxu.lost_world.lostworld.willpower;
 
 import faxu.lost_world.lostworld.LostWorld;
+import faxu.lost_world.lostworld.config.files.LangConfig;
 import faxu.lost_world.lostworld.data.PlayerData;
 import faxu.lost_world.lostworld.util.ActionBar;
+import faxu.lost_world.lostworld.util.Common;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -63,8 +64,7 @@ public class Willpower {
                     if (player.isOnline()) {
                         int willPowerAmount = getWillPower(player);
                         int willPowerMax = getMaxWillPower(player);
-                        ActionBar.sendActionBar(player, ChatColor.translateAlternateColorCodes('&',
-                                config.getString("names.willpower") + ": " + willPowerAmount + "/" + willPowerMax));
+                        ActionBar.sendActionBar(player, Common.colorize(LangConfig.get().getString("name.willpower") + ": " + willPowerAmount + "/" + willPowerMax));
 
                     }
                 }

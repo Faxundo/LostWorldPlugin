@@ -1,19 +1,23 @@
 package faxu.lost_world.lostworld.menusystem.menus;
 
 import faxu.lost_world.lostworld.LostWorld;
+import faxu.lost_world.lostworld.config.files.LangConfig;
 import faxu.lost_world.lostworld.data.PlayerData;
 import faxu.lost_world.lostworld.data.PlayerDataManager;
-import faxu.lost_world.lostworld.data.races.RaceDataManager;
+import faxu.lost_world.lostworld.data.race.RaceDataManager;
+import faxu.lost_world.lostworld.item.CustomItem;
 import faxu.lost_world.lostworld.menusystem.Menu;
 import faxu.lost_world.lostworld.menusystem.PlayerMenuUtility;
+import faxu.lost_world.lostworld.stat.Constitution;
+import faxu.lost_world.lostworld.stat.Luck;
+import faxu.lost_world.lostworld.util.Common;
 import faxu.lost_world.lostworld.willpower.Willpower;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class ConfirmRaceSelection extends Menu {
 
@@ -21,6 +25,8 @@ public class ConfirmRaceSelection extends Menu {
     private final FileConfiguration config;
     private final PlayerDataManager playerDataManager;
     private final RaceDataManager raceDataManager;
+    private final Constitution constitution;
+    private final Luck luck;
     private final Willpower willpower;
 
     public ConfirmRaceSelection(LostWorld plugin, PlayerMenuUtility playerMenuUtility) {
@@ -29,12 +35,15 @@ public class ConfirmRaceSelection extends Menu {
         config = plugin.getConfig();
         playerDataManager = plugin.getPlayerDataManager();
         raceDataManager = plugin.getRaceDataManager();
+
+        luck = new Luck(plugin);
+        constitution = new Constitution(this.plugin);
         willpower = new Willpower(this.plugin);
     }
 
     @Override
     public String getMenuName() {
-        return ChatColor.translateAlternateColorCodes('&', config.getString("names.inv-confirm"));
+        return Common.colorize(LangConfig.get().getString("name.inv-confirm"));
     }
 
     @Override
@@ -56,13 +65,18 @@ public class ConfirmRaceSelection extends Menu {
 
                 //Avoid you set the same race has you have.
                 if (!playerData.getRace().getName().equals(race)) {
+
                     playerDataManager.setRace(player, raceDataManager.getRaceByName(race));
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.choose-new-race")));
+
                     willpower.setWillPower(player, 0, true);
-                    playerDataManager.setRaceLevel(player, 1);
+
+                    player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 0.5F, 0.5F);
+                    player.sendMessage(Common.colorize(config.getString("messages.choose-new-race")));
+
                     player.closeInventory();
                 } else {
-                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', config.getString("messages.already-have-race")));
+                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 0.5F, 0.5F);
+                    player.sendMessage(Common.colorize(config.getString("messages.already-have-race")));
                     new RaceSelectionMenu(plugin, LostWorld.getPlayerMenuUtility(player)).openMenu();
                 }
 
@@ -76,18 +90,7 @@ public class ConfirmRaceSelection extends Menu {
 
     @Override
     public void setMenuItems() {
-        ItemStack yes = new ItemStack(Material.EMERALD, 1);
-        ItemMeta yesMeta = yes.getItemMeta();
-        yesMeta.setDisplayName(ChatColor.GREEN + "Yes");
-        yes.setItemMeta(yesMeta);
-
-        ItemStack no = new ItemStack(Material.BARRIER, 1);
-        ItemMeta noMeta = no.getItemMeta();
-        noMeta.setDisplayName(ChatColor.RED + "No");
-        no.setItemMeta(noMeta);
-
-        inventory.setItem(3, yes);
-        inventory.setItem(5, no);
-
+        inventory.setItem(3, CustomItem.getItem(new ItemStack(Material.EMERALD, 1), Common.colorize(LangConfig.get().getString("name.yes")), 10));
+        inventory.setItem(5, CustomItem.getItem(new ItemStack(Material.BARRIER, 1), Common.colorize(LangConfig.get().getString("name.no")), 11));
     }
 }

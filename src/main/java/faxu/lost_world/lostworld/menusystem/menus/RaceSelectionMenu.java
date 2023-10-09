@@ -1,10 +1,12 @@
 package faxu.lost_world.lostworld.menusystem.menus;
 
 import faxu.lost_world.lostworld.LostWorld;
+import faxu.lost_world.lostworld.config.files.LangConfig;
+import faxu.lost_world.lostworld.item.CustomItem;
 import faxu.lost_world.lostworld.menusystem.Menu;
 import faxu.lost_world.lostworld.menusystem.PlayerMenuUtility;
-import faxu.lost_world.lostworld.races.Races;
-import org.bukkit.ChatColor;
+import faxu.lost_world.lostworld.race.Races;
+import faxu.lost_world.lostworld.util.Common;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -27,7 +29,7 @@ public class RaceSelectionMenu extends Menu {
 
     @Override
     public String getMenuName() {
-        return ChatColor.translateAlternateColorCodes('&', config.getString("names.inv-race-selection"));
+        return Common.colorize(LangConfig.get().getString("name.inv-race-selection"));
     }
 
     @Override
@@ -54,44 +56,40 @@ public class RaceSelectionMenu extends Menu {
         ItemMeta humanMeta = humanItem.getItemMeta();
         humanMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, "race"), PersistentDataType.STRING, Races.HUMAN.getName());
         humanItem.setItemMeta(humanMeta);
-        inventory.setItem(10, getItem(humanItem, config.getString("names.human"),
-                config.getString("descriptions.human-description"),
+        inventory.setItem(10, CustomItem.getItem(humanItem, LangConfig.get().getString("name.human"), 2,
+                LangConfig.get().getString("description.human"),
                 " ",
-                config.getString("descriptions.human-ability"),
-                " ",
-                config.getString("descriptions.human-stats")));
+                LangConfig.get().getString("name.initial-stats"),
+                LangConfig.get().getString("stat.human")));
 
         ItemStack orcItem = new ItemStack(Material.DIAMOND);
         ItemMeta orcMeta = orcItem.getItemMeta();
         orcMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, "race"), PersistentDataType.STRING, Races.ORC.getName());
         orcItem.setItemMeta(orcMeta);
-        inventory.setItem(12, getItem(orcItem, config.getString("names.orc"),
-                config.getString("descriptions.orc-description"),
+        inventory.setItem(12, CustomItem.getItem(orcItem, LangConfig.get().getString("name.orc"), 3,
+                LangConfig.get().getString("description.orc"),
                 " ",
-                config.getString("descriptions.orc-ability"),
-                " ",
-                config.getString("descriptions.orc-stats")));
+                LangConfig.get().getString("name.initial-stats"),
+                LangConfig.get().getString("stat.orc")));
 
         ItemStack elfItem = new ItemStack(Material.DIAMOND);
         ItemMeta elfMeta = elfItem.getItemMeta();
         elfMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, "race"), PersistentDataType.STRING, Races.ELF.getName());
         elfItem.setItemMeta(elfMeta);
-        inventory.setItem(14, getItem(elfItem, config.getString("names.elf"),
-                config.getString("descriptions.elf-description"),
+        inventory.setItem(14, CustomItem.getItem(elfItem, LangConfig.get().getString("name.elf"), 4,
+                LangConfig.get().getString("description.elf"),
                 " ",
-                config.getString("descriptions.elf-ability"),
-                " ",
-                config.getString("descriptions.elf-stats")));
+                LangConfig.get().getString("name.initial-stats"),
+                LangConfig.get().getString("stat.elf")));
 
         ItemStack dwarfItem = new ItemStack(Material.DIAMOND);
         ItemMeta dwarfMeta = dwarfItem.getItemMeta();
         dwarfMeta.getPersistentDataContainer().set(new NamespacedKey(plugin, "race"), PersistentDataType.STRING, Races.DWARF.getName());
         dwarfItem.setItemMeta(dwarfMeta);
-        inventory.setItem(16, getItem(dwarfItem, config.getString("names.dwarf"),
-                config.getString("descriptions.dwarf-description"),
+        inventory.setItem(16, CustomItem.getItem(dwarfItem, LangConfig.get().getString("name.dwarf"), 5,
+                LangConfig.get().getString("description.dwarf"),
                 " ",
-                config.getString("descriptions.dwarf-ability"),
-                " ",
-                config.getString("descriptions.dwarf-stats")));
+                LangConfig.get().getString("name.initial-stats"),
+                LangConfig.get().getString("stat.dwarf")));
     }
 }

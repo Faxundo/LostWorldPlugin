@@ -3,6 +3,8 @@ package faxu.lost_world.lostworld.leveling;
 import faxu.lost_world.lostworld.LostWorld;
 import faxu.lost_world.lostworld.data.PlayerData;
 import faxu.lost_world.lostworld.data.PlayerDataManager;
+import faxu.lost_world.lostworld.util.Common;
+import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -21,22 +23,26 @@ public class RaceLeveling {
     public void updateLevel(Player player) {
         PlayerData playerData = playerDataManager.getPlayerData(player);
         int level = playerData.getRaceLevel();
-        if (level != 0 && level < maxLevel() &&
-                player.getLevel() >= multiplierBase()*(multiplierLevel()*level)) {
+        int statPoints = playerData.getStatPoints();
+        if (level != 0 && level < maxLevel() && player.getLevel() >= multiplierBase() + (multiplierLevel() * level)) {
+
             playerDataManager.setRaceLevel(player, level + 1);
-            player.setLevel(player.getLevel() - multiplierBase()*(multiplierLevel()*level));
-            System.out.println(player.getName());
+            playerDataManager.setStatPoint(player, statPoints + 1);
+            player.setLevel(player.getLevel() - (multiplierBase() + (multiplierLevel() * level)));
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.5F, 0.5F);
+            player.sendMessage(Common.colorize(config.getString("messages.level-up")));
+
         } else {
-            player.sendMessage("Te faltan niveles pa");
+            player.sendMessage(Common.colorize(config.getString("messages.no-have-level")));
         }
     }
 
     public int multiplierBase() {
-        return config.getInt("levleing.multiplier-base");
+        return config.getInt("leveling.multiplier-base");
     }
 
     public int multiplierLevel() {
-        return config.getInt("levleing.multiplier-level");
+        return config.getInt("leveling.multiplier-level");
     }
 
     public int maxLevel() {
